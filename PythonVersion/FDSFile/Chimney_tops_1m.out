@@ -1,0 +1,1296 @@
+
+ Fire Dynamics Simulator
+
+ Current Date     : May 28, 2020  11:54:01
+ Revision         : FDS6.7.4-0-gbfaa110-release
+ Revision Date    : Fri Mar 6 10:17:46 2020 -0500
+ Compiler         : Intel ifort 19.0.4.243
+ Compilation Date : Mar 09, 2020 16:12:17
+
+ MPI Enabled;    Number of MPI Processes:       8
+ OpenMP Enabled; Number of OpenMP Threads:      4
+
+ MPI version: 3.1
+ MPI library version: Intel(R) MPI Library 2019 Update 4 for Linux* OS
+
+
+ Job TITLE        : Simulation of Chimney Tops fire
+ Job ID string    : Chimney_tops_1m
+
+
+ Grid Dimensions, Mesh     1
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     1
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     2
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     2
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     3
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     3
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     4
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     4
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     5
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     5
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     6
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     6
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     7
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     7
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+ Grid Dimensions, Mesh     8
+
+   Cells in the X Direction            50
+   Cells in the Y Direction            50
+   Cells in the Z Direction            75
+   Number of Grid Cells            187500
+
+
+ Physical Dimensions, Mesh     8
+
+   Length (m)                      50.000
+   Width  (m)                      50.000
+   Height (m)                      75.000
+   Initial Time Step (s)            1.000
+
+Total Number of Grid Cells       1500000
+
+
+ Miscellaneous Parameters
+
+   Simulation Start Time (s)          0.0
+   Simulation End Time (s)            1.0
+   LES Calculation
+   Eddy Viscosity:           Deardorff Model (C_DEARDORFF = 0.10)
+   Near-wall Eddy Viscosity: Smagorinsky with Van Driest damping (C_SMAGORINSKY = 0.20)
+   Turbulent Prandtl Number:         0.50
+   Turbulent Schmidt Number:         0.50
+   Ambient Temperature (C):         30.00
+
+
+ Mass Fraction Transformation Matrix to Convert Species Mixtures (Columns) to Primitive Species (Rows)
+
+                         AIR       CELLULOS  PRODUCTS  WATER VA
+   CELLULOSE             0.000000  1.000000  0.000000  0.000000
+   NITROGEN              0.758772  0.000000  0.634221  0.000000
+   OXYGEN                0.229877  0.000000  0.000000  0.000000
+   CARBON DIOXIDE        0.000589  0.000000  0.264838  0.000000
+   CARBON MONOXIDE       0.000000  0.000000  0.000000  0.000000
+   WATER VAPOR           0.010763  0.000000  0.100120  1.000000
+   SOOT                  0.000000  0.000000  0.000821  0.000000
+   HYDROGEN              0.000000  0.000000  0.000000  0.000000
+
+
+ Primitive Species Information
+
+   CELLULOSE
+   Gas Species
+   Molecular Weight (g/mol)           162.14060
+   Ambient Density (kg/m^3)            6.518
+   Enthalpy of Formation (J/kg)       -6.52E+06
+
+   NITROGEN
+   Gas Species
+   Molecular Weight (g/mol)            28.01340
+   Ambient Density (kg/m^3)            1.126
+   Enthalpy of Formation (J/kg)        0.00E+00
+
+   OXYGEN
+   Gas Species
+   Molecular Weight (g/mol)            31.99880
+   Ambient Density (kg/m^3)            1.286
+   Enthalpy of Formation (J/kg)        0.00E+00
+
+   CARBON DIOXIDE
+   Gas Species
+   Molecular Weight (g/mol)            44.00950
+   Ambient Density (kg/m^3)            1.769
+   Enthalpy of Formation (J/kg)       -8.94E+06
+
+   CARBON MONOXIDE
+   Gas Species
+   Molecular Weight (g/mol)            28.01010
+   Ambient Density (kg/m^3)            1.126
+   Enthalpy of Formation (J/kg)       -3.95E+06
+
+   WATER VAPOR
+   Gas Species
+   Molecular Weight (g/mol)            18.01528
+   Ambient Density (kg/m^3)            0.724
+   Enthalpy of Formation (J/kg)       -1.34E+07
+
+   SOOT
+   Gas Species
+   Molecular Weight (g/mol)            10.91042
+   Ambient Density (kg/m^3)            0.439
+   Enthalpy of Formation (J/kg)        0.00E+00
+
+   HYDROGEN
+   Gas Species
+   Molecular Weight (g/mol)             2.01588
+   Ambient Density (kg/m^3)            0.081
+   Enthalpy of Formation (J/kg)        0.00E+00
+
+
+ Tracked (Lumped) Species Information
+
+   AIR
+   Molecular Weight (g/mol)            28.66911
+   Ambient Density (kg/m^3)            1.152
+   Initial Mass Fraction               1.000
+   Enthalpy of Formation (J/kg)     -1.50E+05
+
+   Sub Species                    Mass Fraction     Mole Fraction
+   NITROGEN                       7.587716E-01      7.765320E-01
+   OXYGEN                         2.298769E-01      2.059567E-01
+   CARBON DIOXIDE                 5.885961E-04      3.834291E-04
+   WATER VAPOR                    1.076292E-02      1.712787E-02
+ 
+     Viscosity (kg/m/s) Ambient,  303 K:  1.84E-05
+                                  500 K:  2.61E-05
+                                 1000 K:  4.12E-05
+                                 1500 K:  5.37E-05
+   Therm. Cond. (W/m/K) Ambient,  303 K:  2.62E-02
+                                  500 K:  3.81E-02
+                                 1000 K:  6.69E-02
+                                 1500 K:  9.28E-02
+        Enthalpy (J/kg) Ambient,  303 K: -1.45E+05
+                                  500 K:  5.83E+04
+                                 1000 K:  6.11E+05
+                                 1500 K:  1.21E+06
+    Spec. Heat (J/kg/K) Ambient,  303 K:  1.02E+03
+                                  500 K:  1.05E+03
+                                 1000 K:  1.16E+03
+                                 1500 K:  1.24E+03
+   Diff. Coeff. (m^2/s) Ambient,  303 K:  2.11E-05
+                                  500 K:  4.97E-05
+                                 1000 K:  1.58E-04
+                                 1500 K:  3.10E-04
+
+   CELLULOSE
+   Molecular Weight (g/mol)           162.14060
+   Ambient Density (kg/m^3)            6.518
+   Initial Mass Fraction               0.000
+   Enthalpy of Formation (J/kg)     -6.52E+06
+
+   Sub Species                    Mass Fraction     Mole Fraction
+   CELLULOSE                      1.000000E+00      1.000000E+00
+ 
+     Viscosity (kg/m/s) Ambient,  303 K:  4.29E-05
+                                  500 K:  6.04E-05
+                                 1000 K:  9.50E-05
+                                 1500 K:  1.24E-04
+   Therm. Cond. (W/m/K) Ambient,  303 K:  1.08E-02
+                                  500 K:  1.53E-02
+                                 1000 K:  2.40E-02
+                                 1500 K:  3.12E-02
+        Enthalpy (J/kg) Ambient,  303 K: -6.52E+06
+                                  500 K: -6.48E+06
+                                 1000 K: -6.39E+06
+                                 1500 K: -6.30E+06
+    Spec. Heat (J/kg/K) Ambient,  303 K:  1.79E+02
+                                  500 K:  1.79E+02
+                                 1000 K:  1.79E+02
+                                 1500 K:  1.79E+02
+   Diff. Coeff. (m^2/s) Ambient,  303 K:  1.61E-05
+                                  500 K:  3.78E-05
+                                 1000 K:  1.20E-04
+                                 1500 K:  2.35E-04
+
+   PRODUCTS
+   Molecular Weight (g/mol)            29.16269
+   Ambient Density (kg/m^3)            1.172
+   Initial Mass Fraction               0.000
+   Enthalpy of Formation (J/kg)     -3.71E+06
+
+   Sub Species                    Mass Fraction     Mole Fraction
+   NITROGEN                       6.342208E-01      6.602405E-01
+   CARBON DIOXIDE                 2.648385E-01      1.754940E-01
+   CARBON MONOXIDE                0.000000E+00      0.000000E+00
+   WATER VAPOR                    1.001200E-01      1.620718E-01
+   SOOT                           8.207396E-04      2.193771E-03
+ 
+     Viscosity (kg/m/s) Ambient,  303 K:  1.64E-05
+                                  500 K:  2.38E-05
+                                 1000 K:  3.89E-05
+                                 1500 K:  5.14E-05
+   Therm. Cond. (W/m/K) Ambient,  303 K:  2.34E-02
+                                  500 K:  3.58E-02
+                                 1000 K:  6.70E-02
+                                 1500 K:  9.62E-02
+        Enthalpy (J/kg) Ambient,  303 K: -3.71E+06
+                                  500 K: -3.49E+06
+                                 1000 K: -2.88E+06
+                                 1500 K: -2.20E+06
+    Spec. Heat (J/kg/K) Ambient,  303 K:  1.07E+03
+                                  500 K:  1.14E+03
+                                 1000 K:  1.30E+03
+                                 1500 K:  1.40E+03
+   Diff. Coeff. (m^2/s) Ambient,  303 K:  2.04E-05
+                                  500 K:  4.89E-05
+                                 1000 K:  1.58E-04
+                                 1500 K:  3.11E-04
+
+   WATER VAPOR
+   Molecular Weight (g/mol)            18.01528
+   Ambient Density (kg/m^3)            0.724
+   Initial Mass Fraction               0.000
+   Enthalpy of Formation (J/kg)     -1.34E+07
+
+   Sub Species                    Mass Fraction     Mole Fraction
+   WATER VAPOR                    1.000000E+00      1.000000E+00
+ 
+     Viscosity (kg/m/s) Ambient,  303 K:  1.09E-05
+                                  500 K:  1.77E-05
+                                 1000 K:  3.58E-05
+                                 1500 K:  5.21E-05
+   Therm. Cond. (W/m/K) Ambient,  303 K:  2.02E-02
+                                  500 K:  3.46E-02
+                                 1000 K:  8.21E-02
+                                 1500 K:  1.37E-01
+        Enthalpy (J/kg) Ambient,  303 K: -1.34E+07
+                                  500 K: -1.30E+07
+                                 1000 K: -1.20E+07
+                                 1500 K: -1.07E+07
+    Spec. Heat (J/kg/K) Ambient,  303 K:  1.87E+03
+                                  500 K:  1.96E+03
+                                 1000 K:  2.29E+03
+                                 1500 K:  2.63E+03
+   Diff. Coeff. (m^2/s) Ambient,  303 K:  2.24E-05
+                                  500 K:  5.78E-05
+                                 1000 K:  1.98E-04
+                                 1500 K:  3.95E-04
+
+
+ Gas Phase Reaction Information
+
+   Fuel                                           Heat of Combustion (kJ/kg)
+   CELLULOSE                                                      15334.1860
+
+   Stoichiometry
+
+   Primitive Species Stoich. Coeff.
+   Species ID                                                          Molar
+   CELLULOSE                                                       -1.000000
+   NITROGEN                                                        -0.000000
+   OXYGEN                                                          -5.931268
+   CARBON DIOXIDE                                                   5.933125
+   WATER VAPOR                                                      4.996285
+   SOOT                                                             0.074305
+
+   Tracked (Lumped) Species Stoich. Coeff.
+   Species ID                                             Molar         Mass
+   AIR                                               -28.798618    -5.092066
+   CELLULOSE                                          -1.000000    -1.000000
+   PRODUCTS                                           33.871066     6.092066
+
+   Reaction Kinetics
+
+   Arrhenius Parameters
+   Pre-exponential:    Infinite
+   Activation Energy:  N/A
+
+   ODE Solver:  EXPLICIT EULER
+   Extinction Model:  EXTINCTION 2
+   Auto-Ignition Temperature (K):       0.0
+   Critical Flame Temperature (K):   1700.2
+
+
+ Material Information
+
+   1 GENERIC VEGETATION                                          
+     Emissivity                      0.900
+     Density (kg/m3)                 500.0
+     Specific Heat (kJ/kg/K)      1.50E+00
+     Conductivity (W/m/K)           0.1000
+     Reaction  1
+        Residue: CHAR, Yield:  0.200
+        Gaseous Yields:
+        AIR                                                         :     0.00
+        CELLULOSE                                                   :     0.80
+        PRODUCTS                                                    :     0.00
+        WATER VAPOR                                                 :     0.00
+        A (1/s)    :  7.46E+27
+        E (J/mol):  2.70E+05
+        H_R (kJ/kg):  4.18E+02
+        N_S        :     1.00
+
+   2 MOISTURE                                                    
+     Emissivity                      0.900
+     Density (kg/m3)                1000.0
+     Specific Heat (kJ/kg/K)      4.18E+00
+     Conductivity (W/m/K)           0.1000
+     Reaction  1
+        Gaseous Yields:
+        AIR                                                         :     0.00
+        CELLULOSE                                                   :     0.00
+        PRODUCTS                                                    :     0.00
+        WATER VAPOR                                                 :     1.00
+        A (1/s)    :  5.75E+86
+        E (J/mol):  6.29E+05
+        H_R (kJ/kg):  2.50E+03
+        N_S        :     1.00
+
+   3 CHAR                                                        
+     Emissivity                      0.900
+     Density (kg/m3)                 100.0
+     Specific Heat (kJ/kg/K)      1.00E+00
+     Conductivity (W/m/K)           0.1000
+
+   4 DIRT                                                        
+     Emissivity                      0.900
+     Density (kg/m3)                1300.0
+     Specific Heat (kJ/kg/K)      2.00E+00
+     Conductivity (W/m/K)           0.2500
+
+
+ Surface Conditions
+
+   0 INERT (DEFAULT)
+
+   1 FIRE
+     HRR Per Unit Area (kW/m2)       1500.0
+     CELLULOSE Mass Flux (kg/s/m2)   9.78E-02
+
+   2 grass
+     Material List
+          1  GENERIC VEGETATION
+          2  MOISTURE
+          3  CHAR
+     Layer  1
+        Thickness   (m):  0.00020
+        Density (kg/m3):   516.26
+        GENERIC VEGETATION, Mass fraction:    0.94
+        MOISTURE, Mass fraction:    0.06
+     Total surface density     0.052 kg/m2
+     Solid Phase Node, Layer, Coordinates(m):
+                    0      1       0.0000000
+                    1      1       0.0001000
+                    2      1       0.0002000
+     Assumed cylindrical symmetry
+     Convection length scale (m)  4.00E-04
+
+   3 needles
+     Material List
+          1  GENERIC VEGETATION
+          2  MOISTURE
+          3  CHAR
+     Layer  1
+        Thickness   (m):  0.02000
+        Density (kg/m3):   512.82
+        GENERIC VEGETATION, Mass fraction:    0.95
+        MOISTURE, Mass fraction:    0.05
+     Total surface density     5.128 kg/m2
+     Solid Phase Node, Layer, Coordinates(m):
+                    0      1       0.0000000
+                    1      1       0.0001053
+                    2      1       0.0003158
+                    3      1       0.0007368
+                    4      1       0.0015789
+                    5      1       0.0032632
+                    6      1       0.0066316
+                    7      1       0.0133684
+                    8      1       0.0167368
+                    9      1       0.0184211
+                   10      1       0.0192632
+                   11      1       0.0196842
+                   12      1       0.0198947
+                   13      1       0.0200000
+     Assumed cylindrical symmetry
+     Convection length scale (m)  4.00E-02
+
+   4 surf1
+     Material List
+          1  DIRT
+     Layer  1
+        Thickness   (m):  0.20000
+        Density (kg/m3):  1300.00
+        DIRT, Mass fraction:    1.00
+     Total surface density   260.000 kg/m2
+     Reaction products considered from the first  0.50 layers.
+     Solid Phase Node, Layer, Coordinates(m):
+                    0      1       0.0000000
+                    1      1       0.0002611
+                    2      1       0.0007833
+                    3      1       0.0018277
+                    4      1       0.0039164
+                    5      1       0.0080940
+                    6      1       0.0164491
+                    7      1       0.0331593
+                    8      1       0.0665796
+                    9      1       0.1334204
+                   10      1       0.1668407
+                   11      1       0.1835509
+                   12      1       0.1919060
+                   13      1       0.1960836
+                   14      1       0.1981723
+                   15      1       0.1992167
+                   16      1       0.1997389
+                   17      1       0.2000000
+     Exposed Backing
+
+   5 surf2
+     Material List
+          1  DIRT
+     Layer  1
+        Thickness   (m):  0.20000
+        Density (kg/m3):  1300.00
+        DIRT, Mass fraction:    1.00
+     Total surface density   260.000 kg/m2
+     Reaction products considered from the first  0.50 layers.
+     Solid Phase Node, Layer, Coordinates(m):
+                    0      1       0.0000000
+                    1      1       0.0002611
+                    2      1       0.0007833
+                    3      1       0.0018277
+                    4      1       0.0039164
+                    5      1       0.0080940
+                    6      1       0.0164491
+                    7      1       0.0331593
+                    8      1       0.0665796
+                    9      1       0.1334204
+                   10      1       0.1668407
+                   11      1       0.1835509
+                   12      1       0.1919060
+                   13      1       0.1960836
+                   14      1       0.1981723
+                   15      1       0.1992167
+                   16      1       0.1997389
+                   17      1       0.2000000
+     Exposed Backing
+
+   6 OPEN
+     Passive Vent to Atmosphere
+
+   7 MIRROR
+     Symmetry Plane
+
+   8 INTERPOLATED
+
+   9 PERIODIC
+
+  10 HVAC
+
+  11 MASSLESS TRACER
+
+  12 DROPLET
+
+  13 EVACUATION_OUTFLOW
+     Normal Velocity (m/s)         0.000
+
+  14 MASSLESS TARGET
+
+  15 PERIODIC WIND
+
+  16 SLICE
+
+
+ Slice File Information, Mesh     1
+
+   Sampling Interval (s)             0.500
+
+   1 Nodes:   0  50   0  50   1   1, Quantity: VELOCITY
+   2 Nodes:   0  50   0  50   1   1, Quantity: U-VELOCITY
+   3 Nodes:   0  50   0  50   1   1, Quantity: V-VELOCITY
+   4 Nodes:   0  50   0  50   1   1, Quantity: W-VELOCITY
+
+
+ Radiation Model Information
+
+   Number of control angles  104
+   Time step increment         3
+   Angle increment             5
+   Theta band N_phi   Solid angle
+     1:        4     0.120
+     2:       12     0.114
+     3:       16     0.127
+     4:       20     0.120
+     5:       20     0.120
+     6:       16     0.127
+     7:       12     0.114
+     8:        4     0.120
+   Using gray gas absorption.
+   Mean beam length  0.100 m
+ 
+ 
+
+ Run Time Diagnostics
+
+       Time Step       1   May 28, 2020  11:54:27
+       Step Size:    0.569E-01 s, Total Time:       0.06 s
+       Pressure Iterations:      4
+       Maximum Velocity Error:  0.37E+00 on Mesh   4 at (  25  15  76)
+       Maximum Pressure Error:  0.20E-12 on Mesh   4 at (  27  27  75)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.24E+00 at (  34,   1,  52)
+       Max divergence:  0.38E-01 at (   1,   1,  22)
+       Min divergence: -0.71E-04 at (   1,   2,  22)
+       Max VN number:   0.53E-01 at (  50,  37,  55)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:             55.281 kW
+       Radiation Loss to Boundaries:        -0.007 kW
+       Mesh    2
+       Max CFL number:  0.21E+00 at (   1,   2,  74)
+       Max divergence:  0.24E-10 at (   2,   1,  74)
+       Min divergence: -0.73E-08 at (   1,  50,  50)
+       Max VN number:   0.34E-01 at (   1,  44,  53)
+       No. of Lagrangian Particles:          1665
+       Mesh    3
+       Max CFL number:  0.22E+00 at (   1,  48,  10)
+       Max divergence:  0.66E-10 at (  17,   4,  17)
+       Min divergence: -0.31E-07 at (  50,   1,  52)
+       Max VN number:   0.53E-01 at (  50,  23,  46)
+       No. of Lagrangian Particles:          5033
+       Radiation Loss to Boundaries:        -0.009 kW
+       Mesh    4
+       Max CFL number:  0.21E+00 at (  28,  46,  75)
+       Max divergence:  0.41E-10 at (   3,  47,  48)
+       Min divergence: -0.11E-07 at (   1,   1,  51)
+       Max VN number:   0.34E-01 at (  28,  34,  75)
+       No. of Lagrangian Particles:          3025
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    5
+       Max CFL number:  0.21E+00 at (  50,   2,   1)
+       Max divergence:  0.50E-14 at (   1,  29,  75)
+       Min divergence: -0.86E-07 at (  50,  50,   1)
+       Max VN number:   0.78E-03 at (  35,  26,   5)
+       Radiation Loss to Boundaries:        -0.020 kW
+       Mesh    6
+       Max CFL number:  0.24E+00 at (  50,  40,  32)
+       Max divergence:  0.57E-10 at (  26,  13,  20)
+       Min divergence: -0.21E-07 at (  21,  50,   1)
+       Max VN number:   0.53E-01 at (  22,  44,   1)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    7
+       Max CFL number:  0.20E+00 at (  46,   2,  28)
+       Max divergence:  0.49E-14 at (   1,  50,  75)
+       Min divergence: -0.19E-06 at (  50,   1,   1)
+       Max VN number:   0.80E-03 at (   4,  39,   5)
+       Radiation Loss to Boundaries:        -0.038 kW
+       Mesh    8
+       Max CFL number:  0.22E+00 at (  50,  26,  26)
+       Max divergence:  0.48E-10 at (  49,  47,   4)
+       Min divergence: -0.25E-07 at (  21,   1,   1)
+       Max VN number:   0.59E-01 at (  47,  50,   1)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.006 kW
+ 
+       Time Step       2   May 28, 2020  11:54:37
+       Step Size:    0.626E-01 s, Total Time:       0.12 s
+       Pressure Iterations:     10
+       Maximum Velocity Error:  0.48E+00 on Mesh   1 at (  32  51  31)
+       Maximum Pressure Error:  0.15E+00 on Mesh   1 at (  50  43  51)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.60E+00 at (  26,  47,  27)
+       Max divergence:  0.19E+00 at (  50,  45,  50)
+       Min divergence: -0.11E-05 at (  49,  50,  48)
+       Max VN number:   0.19E+00 at (  24,  41,  26)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:            413.032 kW
+       Radiation Loss to Boundaries:        -0.019 kW
+       Mesh    2
+       Max CFL number:  0.54E+00 at (  11,  45,  64)
+       Max divergence:  0.14E-04 at (   1,  44,  52)
+       Min divergence: -0.21E-06 at (   1,  50,  50)
+       Max VN number:   0.20E+00 at (   4,  29,  62)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.005 kW
+       Mesh    3
+       Max CFL number:  0.62E+00 at (  10,  23,  11)
+       Max divergence:  0.18E-04 at (  50,   1,  49)
+       Min divergence: -0.11E-05 at (  49,   1,  49)
+       Max VN number:   0.23E+00 at (   4,  45,   9)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              0.006 kW
+       Radiation Loss to Boundaries:        -0.009 kW
+       Mesh    4
+       Max CFL number:  0.64E+00 at (   9,  34,  55)
+       Max divergence:  0.52E-08 at (  22,   1,  75)
+       Min divergence: -0.14E-07 at (   1,   1,  51)
+       Max VN number:   0.25E+00 at (   7,  30,  52)
+       No. of Lagrangian Particles:          3025
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    5
+       Max CFL number:  0.27E+00 at (  50,   3,   1)
+       Max divergence:  0.11E-13 at (   1,  24,  75)
+       Min divergence: -0.86E-07 at (  50,  50,   1)
+       Max VN number:   0.11E-02 at (  50,   5,   1)
+       Radiation Loss to Boundaries:        -0.020 kW
+       Mesh    6
+       Max CFL number:  0.64E+00 at (  32,  45,  12)
+       Max divergence:  0.70E-09 at (  26,  49,   4)
+       Min divergence: -0.18E-07 at (  20,  50,   1)
+       Max VN number:   0.21E+00 at (  42,  42,  23)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    7
+       Max CFL number:  0.24E+00 at (  49,   2,   5)
+       Max divergence:  0.98E-14 at (   1,  50,  75)
+       Min divergence: -0.19E-06 at (  50,   1,   1)
+       Max VN number:   0.91E-03 at (   4,  39,   5)
+       Radiation Loss to Boundaries:        -0.038 kW
+       Mesh    8
+       Max CFL number:  0.62E+00 at (  33,  38,   4)
+       Max divergence:  0.40E-08 at (  22,   2,   1)
+       Min divergence: -0.23E-07 at (  20,   1,   1)
+       Max VN number:   0.20E+00 at (  43,  50,   2)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.006 kW
+ 
+       Time Step       3   May 28, 2020  11:54:47
+       Step Size:    0.689E-01 s, Total Time:       0.19 s
+       Pressure Iterations:     10
+       Maximum Velocity Error:  0.47E+00 on Mesh   2 at (   1  51  50)
+       Maximum Pressure Error:  0.37E+00 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.59E+00 at (  20,  41,  24)
+       Max divergence:  0.40E+00 at (  50,  45,  50)
+       Min divergence: -0.17E-07 at (  50,  50,  53)
+       Max VN number:   0.40E+00 at (  44,   5,  65)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:            924.535 kW
+       Radiation Loss to Boundaries:       -76.927 kW
+       Mesh    2
+       Max CFL number:  0.55E+00 at (   2,  15,  66)
+       Max divergence:  0.56E-03 at (   1,  44,  52)
+       Min divergence: -0.69E-08 at (   1,  50,  53)
+       Max VN number:   0.41E+00 at (   9,  48,  60)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.118 kW
+       Mesh    3
+       Max CFL number:  0.57E+00 at (  36,  30,  32)
+       Max divergence:  0.71E-04 at (  50,   1,  49)
+       Min divergence: -0.67E-07 at (  48,   2,  49)
+       Max VN number:   0.46E+00 at (   8,  42,  10)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              0.024 kW
+       Radiation Loss to Boundaries:        -0.009 kW
+       Mesh    4
+       Max CFL number:  0.58E+00 at (  21,  22,  68)
+       Max divergence:  0.15E-06 at (   1,   1,  50)
+       Min divergence: -0.14E-07 at (   1,   1,  51)
+       Max VN number:   0.47E+00 at (   7,  30,  52)
+       No. of Lagrangian Particles:          3025
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    5
+       Max CFL number:  0.35E+00 at (  50,   1,   1)
+       Max divergence:  0.19E-13 at (   1,  24,  75)
+       Min divergence: -0.86E-07 at (  50,  50,   1)
+       Max VN number:   0.28E-02 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.020 kW
+       Mesh    6
+       Max CFL number:  0.60E+00 at (  19,  27,   6)
+       Max divergence:  0.65E-09 at (  30,  49,   9)
+       Min divergence: -0.17E-07 at (  20,  50,   1)
+       Max VN number:   0.43E+00 at (  42,  42,  23)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    7
+       Max CFL number:  0.26E+00 at (  49,   1,   1)
+       Max divergence:  0.15E-13 at (   1,  50,  75)
+       Min divergence: -0.19E-06 at (  50,   1,   1)
+       Max VN number:   0.22E-02 at (  45,  39,  75)
+       Radiation Loss to Boundaries:        -0.038 kW
+       Mesh    8
+       Max CFL number:  0.59E+00 at (  44,  38,  14)
+       Max divergence:  0.10E-08 at (  26,   1,   4)
+       Min divergence: -0.22E-07 at (  19,   1,   1)
+       Max VN number:   0.43E+00 at (  30,  32,   2)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.006 kW
+ 
+       Time Step       4   May 28, 2020  11:55:00
+       Step Size:    0.604E-01 s, Total Time:       0.25 s
+       Pressure Iterations:      4
+       Maximum Velocity Error:  0.41E+00 on Mesh   2 at (   1  51  51)
+       Maximum Pressure Error:  0.35E+01 on Mesh   1 at (  50  45  50)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.67E+00 at (  26,  47,  27)
+       Max divergence:  0.37E+00 at (  50,  43,  51)
+       Min divergence: -0.10E-07 at (  15,  50,  15)
+       Max VN number:   0.36E+00 at (  20,  41,  23)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           1226.842 kW
+       Radiation Loss to Boundaries:      -183.949 kW
+       Mesh    2
+       Max CFL number:  0.39E+00 at (   2,  31,  61)
+       Max divergence:  0.75E-03 at (   1,  49,  50)
+       Min divergence: -0.42E-08 at (   1,  50,  53)
+       Max VN number:   0.35E+00 at (   5,  36,  61)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.178 kW
+       Mesh    3
+       Max CFL number:  0.69E+00 at (  35,  44,  32)
+       Max divergence:  0.41E-03 at (  50,   1,  49)
+       Min divergence: -0.31E-07 at (  47,   2,  49)
+       Max VN number:   0.36E+00 at (  16,  23,  15)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              0.138 kW
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    4
+       Max CFL number:  0.74E+00 at (   4,  47,  50)
+       Max divergence:  0.70E-06 at (   1,   1,  50)
+       Min divergence: -0.81E-08 at (   1,   1,  52)
+       Max VN number:   0.36E+00 at (  21,  22,  67)
+       No. of Lagrangian Particles:          3025
+       Mesh    5
+       Max CFL number:  0.33E+00 at (  50,   1,   1)
+       Max divergence:  0.24E-13 at (   1,  24,  75)
+       Min divergence: -0.68E-07 at (  50,  50,   1)
+       Max VN number:   0.43E-02 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.015 kW
+       Mesh    6
+       Max CFL number:  0.60E+00 at (  46,  40,  28)
+       Max divergence:  0.35E-09 at (  33,  49,  14)
+       Min divergence: -0.10E-07 at (  20,  50,   1)
+       Max VN number:   0.37E+00 at (  19,  27,   5)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.002 kW
+       Mesh    7
+       Max CFL number:  0.23E+00 at (   1,  14,  75)
+       Max divergence:  0.22E-13 at (   1,  24,  75)
+       Min divergence: -0.11E-06 at (  50,   1,   1)
+       Max VN number:   0.21E-02 at (   2,  50,  75)
+       Radiation Loss to Boundaries:        -0.022 kW
+       Mesh    8
+       Max CFL number:  0.72E+00 at (  47,  50,   1)
+       Max divergence:  0.78E-09 at (  28,  49,   1)
+       Min divergence: -0.14E-07 at (  22,   1,   2)
+       Max VN number:   0.36E+00 at (  41,   9,  23)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.003 kW
+ 
+       Time Step       5   May 28, 2020  11:55:06
+       Step Size:    0.665E-01 s, Total Time:       0.32 s
+       Pressure Iterations:      3
+       Maximum Velocity Error:  0.45E+00 on Mesh   3 at (  50   1  76)
+       Maximum Pressure Error:  0.63E+01 on Mesh   1 at (  50  45  50)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.43E+00 at (  13,  34,  22)
+       Max divergence:  0.46E+00 at (  50,  49,  49)
+       Min divergence: -0.66E-03 at (  48,  48,  49)
+       Max VN number:   0.37E+00 at (  13,  34,  21)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           1769.935 kW
+       Radiation Loss to Boundaries:      -458.626 kW
+       Mesh    2
+       Max CFL number:  0.39E+00 at (   1,   1,  74)
+       Max divergence:  0.13E-02 at (   1,  49,  50)
+       Min divergence: -0.34E-08 at (  21,  50,  75)
+       Max VN number:   0.34E+00 at (   2,  31,  60)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.267 kW
+       Mesh    3
+       Max CFL number:  0.48E+00 at (   1,  48,  10)
+       Max divergence:  0.91E-03 at (  50,   1,  49)
+       Min divergence: -0.15E-07 at (  50,   1,  54)
+       Max VN number:   0.38E+00 at (   1,  44,   7)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              0.370 kW
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    4
+       Max CFL number:  0.41E+00 at (   2,  15,  48)
+       Max divergence:  0.29E-05 at (   1,   1,  50)
+       Min divergence: -0.63E-08 at (   1,   1,  52)
+       Max VN number:   0.36E+00 at (   2,  15,  48)
+       No. of Lagrangian Particles:          3025
+       Mesh    5
+       Max CFL number:  0.39E+00 at (  50,   1,   1)
+       Max divergence:  0.33E-13 at (   1,  24,  75)
+       Min divergence: -0.68E-07 at (  50,  50,   1)
+       Max VN number:   0.70E-02 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.015 kW
+       Mesh    6
+       Max CFL number:  0.50E+00 at (  50,  35,  33)
+       Max divergence:  0.29E-09 at (  33,  49,  14)
+       Min divergence: -0.11E-07 at (  22,  50,   1)
+       Max VN number:   0.36E+00 at (  40,   2,  39)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.002 kW
+       Mesh    7
+       Max CFL number:  0.26E+00 at (   5,  50,  34)
+       Max divergence:  0.31E-13 at (   1,  27,  75)
+       Min divergence: -0.11E-06 at (  50,   1,   1)
+       Max VN number:   0.25E-02 at (  49,   2,   2)
+       Radiation Loss to Boundaries:        -0.022 kW
+       Mesh    8
+       Max CFL number:  0.45E+00 at (  50,  17,  32)
+       Max divergence:  0.81E-09 at (  28,  49,   1)
+       Min divergence: -0.16E-07 at (  22,   1,   1)
+       Max VN number:   0.37E+00 at (  44,  38,  13)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.003 kW
+ 
+       Time Step       6   May 28, 2020  11:55:14
+       Step Size:    0.569E-01 s, Total Time:       0.37 s
+       Pressure Iterations:      3
+       Maximum Velocity Error:  0.42E+00 on Mesh   5 at (  50  51   1)
+       Maximum Pressure Error:  0.10E+02 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.66E+00 at (  26,  47,  27)
+       Max divergence:  0.66E+00 at (  50,  49,  49)
+       Min divergence: -0.17E-07 at (  15,  50,  15)
+       Max VN number:   0.30E+00 at (   2,  45,   6)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           2452.028 kW
+       Radiation Loss to Boundaries:      -560.450 kW
+       Mesh    2
+       Max CFL number:  0.34E+00 at (   1,   1,  74)
+       Max divergence:  0.22E-02 at (   1,  49,  50)
+       Min divergence: -0.52E-08 at (  22,  50,  75)
+       Max VN number:   0.27E+00 at (   2,  31,  60)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.506 kW
+       Mesh    3
+       Max CFL number:  0.62E+00 at (  35,  43,  32)
+       Max divergence:  0.18E-02 at (  50,   1,  49)
+       Min divergence: -0.15E-07 at (  50,   1,  55)
+       Max VN number:   0.32E+00 at (   1,  44,   7)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              0.785 kW
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    4
+       Max CFL number:  0.73E+00 at (   4,  47,  50)
+       Max divergence:  0.89E-05 at (   1,   1,  50)
+       Min divergence: -0.97E-08 at (   6,   1,  56)
+       Max VN number:   0.29E+00 at (   2,  15,  48)
+       No. of Lagrangian Particles:          3025
+       Mesh    5
+       Max CFL number:  0.35E+00 at (  50,   4,   1)
+       Max divergence:  0.37E-13 at (   1,  24,  75)
+       Min divergence: -0.68E-07 at (  50,  50,   1)
+       Max VN number:   0.89E-02 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.015 kW
+       Mesh    6
+       Max CFL number:  0.47E+00 at (  46,  39,  28)
+       Max divergence:  0.22E-09 at (  43,  48,  27)
+       Min divergence: -0.13E-07 at (  22,  50,   1)
+       Max VN number:   0.27E+00 at (  43,  10,  38)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.002 kW
+       Mesh    7
+       Max CFL number:  0.22E+00 at (  33,  50,  61)
+       Max divergence:  0.37E-13 at (   1,  27,  75)
+       Min divergence: -0.11E-06 at (  50,   1,   1)
+       Max VN number:   0.28E-02 at (   2,  49,  64)
+       Radiation Loss to Boundaries:        -0.022 kW
+       Mesh    8
+       Max CFL number:  0.72E+00 at (  47,  50,   1)
+       Max divergence:  0.22E-09 at (  28,  49,   1)
+       Min divergence: -0.18E-07 at (  22,   1,   1)
+       Max VN number:   0.28E+00 at (  44,  38,  13)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.003 kW
+ 
+       Time Step       7   May 28, 2020  11:55:23
+       Step Size:    0.626E-01 s, Total Time:       0.43 s
+       Pressure Iterations:      3
+       Maximum Velocity Error:  0.42E+00 on Mesh   1 at (  29  51  29)
+       Maximum Pressure Error:  0.16E+02 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.43E+00 at (  49,   3,  74)
+       Max divergence:  0.75E+00 at (  50,  49,  49)
+       Min divergence: -0.15E-07 at (  15,  50,  15)
+       Max VN number:   0.31E+00 at (   2,  45,   6)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           3163.452 kW
+       Radiation Loss to Boundaries:      -628.683 kW
+       Mesh    2
+       Max CFL number:  0.38E+00 at (   1,   1,  74)
+       Max divergence:  0.37E-02 at (   1,  49,  50)
+       Min divergence: -0.43E-08 at (  22,  50,  75)
+       Max VN number:   0.27E+00 at (   2,  31,  60)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.822 kW
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    3
+       Max CFL number:  0.47E+00 at (   1,  48,  10)
+       Max divergence:  0.27E-02 at (  50,   1,  49)
+       Min divergence: -0.14E-07 at (  50,   1,  74)
+       Max VN number:   0.34E+00 at (   1,  44,   7)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              1.274 kW
+       Radiation Loss to Boundaries:        -0.004 kW
+       Mesh    4
+       Max CFL number:  0.33E+00 at (   2,  15,  48)
+       Max divergence:  0.22E-04 at (   1,   1,  50)
+       Min divergence: -0.88E-08 at (   6,   1,  56)
+       Max VN number:   0.30E+00 at (   2,  15,  48)
+       No. of Lagrangian Particles:          3025
+       Total Heat Release Rate:              0.002 kW
+       Mesh    5
+       Max CFL number:  0.42E+00 at (  50,   4,   1)
+       Max divergence:  0.44E-13 at (   1,  24,  75)
+       Min divergence: -0.32E-07 at (  50,  50,   1)
+       Max VN number:   0.13E-01 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    6
+       Max CFL number:  0.52E+00 at (  49,  40,  33)
+       Max divergence:  0.29E-09 at (  22,  46,   2)
+       Min divergence: -0.79E-08 at (  22,  50,   1)
+       Max VN number:   0.28E+00 at (  43,  10,  38)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    7
+       Max CFL number:  0.24E+00 at (  16,  50,  75)
+       Max divergence:  0.44E-13 at (   1,  27,  75)
+       Min divergence: -0.61E-07 at (  50,   1,   1)
+       Max VN number:   0.39E-02 at (   2,  49,  64)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    8
+       Max CFL number:  0.48E+00 at (  50,  17,  32)
+       Max divergence:  0.45E-09 at (  24,   2,   3)
+       Min divergence: -0.12E-07 at (  22,   1,   1)
+       Max VN number:   0.33E+00 at (  45,  50,   1)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.002 kW
+ 
+       Time Step       8   May 28, 2020  11:55:30
+       Step Size:    0.532E-01 s, Total Time:       0.49 s
+       Pressure Iterations:      3
+       Maximum Velocity Error:  0.33E+00 on Mesh   1 at (  29  51  29)
+       Maximum Pressure Error:  0.78E+00 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.53E+00 at (  26,  46,  27)
+       Max divergence:  0.81E+00 at (   1,   1,  22)
+       Min divergence: -0.24E-01 at (  50,  45,  51)
+       Max VN number:   0.26E+00 at (   1,   9,  24)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           3804.119 kW
+       Radiation Loss to Boundaries:      -812.205 kW
+       Mesh    2
+       Max CFL number:  0.34E+00 at (   1,   1,  74)
+       Max divergence:  0.40E-02 at (   1,  49,  50)
+       Min divergence: -0.56E-08 at (  22,  50,  75)
+       Max VN number:   0.21E+00 at (   2,  31,  60)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              0.990 kW
+       Radiation Loss to Boundaries:        -0.002 kW
+       Mesh    3
+       Max CFL number:  0.41E+00 at (   1,  48,  10)
+       Max divergence:  0.42E-02 at (  50,   1,  49)
+       Min divergence: -0.15E-07 at (  16,   1,  16)
+       Max VN number:   0.28E+00 at (   1,  44,   7)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              1.938 kW
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    4
+       Max CFL number:  0.71E+00 at (   4,  46,  50)
+       Max divergence:  0.35E-04 at (   1,   1,  50)
+       Min divergence: -0.99E-08 at (   6,   1,  56)
+       Max VN number:   0.24E+00 at (   2,  15,  48)
+       No. of Lagrangian Particles:          3025
+       Total Heat Release Rate:              0.003 kW
+       Mesh    5
+       Max CFL number:  0.37E+00 at (  50,   4,   1)
+       Max divergence:  0.51E-13 at (   1,  24,  75)
+       Min divergence: -0.32E-07 at (  50,  50,   1)
+       Max VN number:   0.14E-01 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    6
+       Max CFL number:  0.47E+00 at (  48,  40,  33)
+       Max divergence:  0.24E-09 at (  22,  46,   2)
+       Min divergence: -0.85E-08 at (  22,  50,   1)
+       Max VN number:   0.22E+00 at (  50,  35,  33)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    7
+       Max CFL number:  0.21E+00 at (  47,  50,  67)
+       Max divergence:  0.50E-13 at (   1,  27,  75)
+       Min divergence: -0.61E-07 at (  50,   1,   1)
+       Max VN number:   0.40E-02 at (   2,  49,  64)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    8
+       Max CFL number:  0.72E+00 at (  47,  50,   1)
+       Max divergence:  0.36E-09 at (  24,   2,   3)
+       Min divergence: -0.12E-07 at (  22,   1,   1)
+       Max VN number:   0.25E+00 at (  40,  50,   3)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.002 kW
+ 
+       Time Step       9   May 28, 2020  11:55:36
+       Step Size:    0.585E-01 s, Total Time:       0.55 s
+       Pressure Iterations:      2
+       Maximum Velocity Error:  0.45E+00 on Mesh   4 at (   4  47  49)
+       Maximum Pressure Error:  0.20E+01 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.43E+00 at (  49,   3,  74)
+       Max divergence:  0.87E+00 at (  50,  43,  51)
+       Min divergence: -0.16E-02 at (  50,  45,  51)
+       Max VN number:   0.28E+00 at (   1,   9,  24)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           4432.973 kW
+       Radiation Loss to Boundaries:     -1002.801 kW
+       Mesh    2
+       Max CFL number:  0.39E+00 at (   1,   1,  74)
+       Max divergence:  0.45E-02 at (   1,  49,  50)
+       Min divergence: -0.53E-08 at (  22,  50,  75)
+       Max VN number:   0.21E+00 at (  13,  41,  67)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              1.208 kW
+       Radiation Loss to Boundaries:        -0.003 kW
+       Mesh    3
+       Max CFL number:  0.47E+00 at (   1,  48,  10)
+       Max divergence:  0.70E-02 at (  50,   1,  49)
+       Min divergence: -0.15E-07 at (  16,   1,  16)
+       Max VN number:   0.32E+00 at (   1,  50,  11)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              2.872 kW
+       Radiation Loss to Boundaries:        -0.006 kW
+       Mesh    4
+       Max CFL number:  0.28E+00 at (   5,  16,  52)
+       Max divergence:  0.60E-04 at (   1,   1,  50)
+       Min divergence: -0.97E-08 at (   6,   1,  56)
+       Max VN number:   0.31E+00 at (   4,  46,  50)
+       No. of Lagrangian Particles:          3025
+       Total Heat Release Rate:              0.005 kW
+       Mesh    5
+       Max CFL number:  0.43E+00 at (  50,   4,   1)
+       Max divergence:  0.56E-13 at (   1,  24,  75)
+       Min divergence: -0.32E-07 at (  50,  50,   1)
+       Max VN number:   0.17E-01 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    6
+       Max CFL number:  0.55E+00 at (  48,  40,  33)
+       Max divergence:  0.17E-09 at (  43,  48,  27)
+       Min divergence: -0.89E-08 at (  22,  50,   1)
+       Max VN number:   0.26E+00 at (  50,  35,  33)
+       No. of Lagrangian Particles:          4520
+       Radiation Loss to Boundaries:        -0.001 kW
+       Mesh    7
+       Max CFL number:  0.23E+00 at (   1,  50,  30)
+       Max divergence:  0.55E-13 at (   1,  27,  75)
+       Min divergence: -0.61E-07 at (  50,   1,   1)
+       Max VN number:   0.51E-02 at (   2,  49,  64)
+       Radiation Loss to Boundaries:        -0.010 kW
+       Mesh    8
+       Max CFL number:  0.47E+00 at (  50,  17,  32)
+       Max divergence:  0.27E-09 at (  24,   2,   3)
+       Min divergence: -0.13E-07 at (  22,   1,   1)
+       Max VN number:   0.30E+00 at (  48,  50,   1)
+       No. of Lagrangian Particles:          2801
+       Radiation Loss to Boundaries:        -0.002 kW
+ 
+       Time Step      10   May 28, 2020  11:55:46
+       Step Size:    0.643E-01 s, Total Time:       0.61 s
+       Pressure Iterations:      3
+       Maximum Velocity Error:  0.36E+00 on Mesh   1 at (  50  51  49)
+       Maximum Pressure Error:  0.23E+01 on Mesh   1 at (  50  49  49)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.59E+00 at (  26,  47,  27)
+       Max divergence:  0.94E+00 at (  50,  43,  51)
+       Min divergence: -0.13E-01 at (  49,  49,  50)
+       Max VN number:   0.30E+00 at (  45,   1,  66)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           5112.836 kW
+       Radiation Loss to Boundaries:     -1259.877 kW
+       Mesh    2
+       Max CFL number:  0.45E+00 at (   1,   1,  74)
+       Max divergence:  0.51E-02 at (   1,  44,  52)
+       Min divergence: -0.58E-08 at (  22,  50,  75)
+       Max VN number:   0.23E+00 at (   1,   1,  73)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              1.554 kW
+       Radiation Loss to Boundaries:        -0.003 kW
+       Mesh    3
+       Max CFL number:  0.53E+00 at (   1,  48,  10)
+       Max divergence:  0.86E-02 at (  50,   1,  49)
+       Min divergence: -0.14E-07 at (  16,   1,  16)
+       Max VN number:   0.36E+00 at (   1,  50,  11)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:              4.152 kW
+       Radiation Loss to Boundaries:        -0.007 kW
+       Mesh    4
+       Max CFL number:  0.89E+00 at (   4,  47,  50)
+       Max divergence:  0.10E-03 at (   1,   1,  50)
+       Min divergence: -0.94E-08 at (   6,   1,  56)
+       Max VN number:   0.25E+00 at (   2,  15,  48)
+       No. of Lagrangian Particles:          3025
+       Total Heat Release Rate:              0.009 kW
+       Mesh    5
+       Max CFL number:  0.50E+00 at (  50,   4,   1)
+       Max divergence:  0.62E-13 at (   1,  24,  75)
+       Min divergence: -0.18E-07 at (  50,  50,   1)
+       Max VN number:   0.21E-01 at (  50,   4,   1)
+       Radiation Loss to Boundaries:        -0.005 kW
+       Mesh    6
+       Max CFL number:  0.64E+00 at (  48,  40,  33)
+       Max divergence:  0.91E-09 at (  20,  41,   1)
+       Min divergence: -0.61E-08 at (  13,  22,   1)
+       Max VN number:   0.29E+00 at (  50,  35,  33)
+       No. of Lagrangian Particles:          4520
+       Mesh    7
+       Max CFL number:  0.26E+00 at (   1,  50,  30)
+       Max divergence:  0.16E-10 at (  48,  49,   1)
+       Min divergence: -0.19E-07 at (  50,   1,   1)
+       Max VN number:   0.65E-02 at (   2,  49,  32)
+       Radiation Loss to Boundaries:        -0.003 kW
+       Mesh    8
+       Max CFL number:  0.89E+00 at (  47,  50,   1)
+       Max divergence:  0.14E-08 at (  20,   3,   1)
+       Min divergence: -0.72E-08 at (  23,   1,   1)
+       Max VN number:   0.31E+00 at (  50,  24,  28)
+       No. of Lagrangian Particles:          2801
+ 
+       Time Step      17   May 28, 2020  11:56:35
+       Step Size:    0.569E-01 s, Total Time:       1.00 s
+       Pressure Iterations:      2
+       Maximum Velocity Error:  0.40E+00 on Mesh   2 at (  15  51  70)
+       Maximum Pressure Error:  0.80E+01 on Mesh   1 at (  50  44  51)
+       ---------------------------------------------------------------
+       Mesh    1
+       Max CFL number:  0.52E+00 at (  49,   4,  74)
+       Max divergence:  0.14E+01 at (   1,   1,  22)
+       Min divergence: -0.17E+00 at (  50,  44,  52)
+       Max VN number:   0.36E+00 at (  45,   1,  66)
+       No. of Lagrangian Particles:          5891
+       Total Heat Release Rate:           9100.228 kW
+       Radiation Loss to Boundaries:     -3432.805 kW
+       Mesh    2
+       Max CFL number:  0.48E+00 at (   1,   1,  74)
+       Max divergence:  0.16E-01 at (   1,  44,  52)
+       Min divergence: -0.51E-08 at (  22,  50,  75)
+       Max VN number:   0.30E+00 at (   1,   1,  73)
+       No. of Lagrangian Particles:          1665
+       Total Heat Release Rate:              5.440 kW
+       Radiation Loss to Boundaries:        -0.020 kW
+       Mesh    3
+       Max CFL number:  0.49E+00 at (   1,  48,  10)
+       Max divergence:  0.15E-01 at (  50,   1,  49)
+       Min divergence: -0.68E-06 at (  45,   3,  50)
+       Max VN number:   0.32E+00 at (   1,  50,  11)
+       No. of Lagrangian Particles:          5033
+       Total Heat Release Rate:             11.230 kW
+       Radiation Loss to Boundaries:        -0.043 kW
+       Mesh    4
+       Max CFL number:  0.31E+00 at (  15,  50,  63)
+       Max divergence:  0.52E-03 at (   1,   1,  50)
+       Min divergence: -0.79E-08 at (  22,   1,  75)
+       Max VN number:   0.19E+00 at (  15,  50,  63)
+       No. of Lagrangian Particles:          3025
+       Total Heat Release Rate:              0.063 kW
+       Mesh    5
+       Max CFL number:  0.51E+00 at (  50,   4,   1)
+       Max divergence:  0.14E-08 at (  45,  49,   1)
+       Min divergence: -0.14E-08 at (  50,   6,   1)
+       Max VN number:   0.31E-01 at (  50,   5,   1)
+       Mesh    6
+       Max CFL number:  0.65E+00 at (  48,  40,  33)
+       Max divergence:  0.12E-08 at (  21,  46,   1)
+       Min divergence: -0.50E-08 at (  13,  22,   1)
+       Max VN number:   0.36E+00 at (  50,  31,  35)
+       No. of Lagrangian Particles:          4520
+       Mesh    7
+       Max CFL number:  0.25E+00 at (   1,  50,  68)
+       Max divergence:  0.66E-10 at (  46,  49,   1)
+       Min divergence: -0.18E-08 at (  50,   1,   1)
+       Max VN number:   0.12E-01 at (   2,  49,  75)
+       Mesh    8
+       Max CFL number:  0.55E+00 at (  50,  17,  32)
+       Max divergence:  0.17E-08 at (  19,   4,   1)
+       Min divergence: -0.60E-08 at (  23,   1,   1)
+       Max VN number:   0.36E+00 at (  50,  24,  28)
+       No. of Lagrangian Particles:          2801
+ 
+
+
+ Time Stepping Wall Clock Time (s):      153.914
+ Total Elapsed Wall Clock Time (s):      219.772
+
+STOP: FDS completed successfully (CHID: Chimney_tops_1m)
