@@ -1,0 +1,199 @@
+ MPI Process      3 started on tellico-compute0
+ MPI Process      9 started on tellico-compute0
+
+ Starting FDS ...
+
+ MPI Process      1 started on tellico-compute0
+ MPI Process     15 started on tellico-compute0
+ MPI Process      5 started on tellico-compute0
+ MPI Process     11 started on tellico-compute0
+ MPI Process     13 started on tellico-compute0
+ MPI Process      0 started on tellico-compute0
+ MPI Process      2 started on tellico-compute0
+ MPI Process      4 started on tellico-compute0
+ MPI Process      6 started on tellico-compute0
+ MPI Process      7 started on tellico-compute0
+ MPI Process      8 started on tellico-compute0
+ MPI Process     10 started on tellico-compute0
+ MPI Process     12 started on tellico-compute0
+ MPI Process     14 started on tellico-compute0
+
+ Reading FDS input file ...
+
+ Mesh 1 is assigned to MPI Process 0
+ Mesh 2 is assigned to MPI Process 1
+ Mesh 3 is assigned to MPI Process 2
+ Mesh 4 is assigned to MPI Process 3
+ Mesh 5 is assigned to MPI Process 4
+ Mesh 6 is assigned to MPI Process 5
+ Mesh 7 is assigned to MPI Process 6
+ Mesh 8 is assigned to MPI Process 7
+ Mesh 9 is assigned to MPI Process 8
+ Mesh 10 is assigned to MPI Process 9
+ Mesh 11 is assigned to MPI Process 10
+ Mesh 12 is assigned to MPI Process 11
+ Mesh 13 is assigned to MPI Process 12
+ Mesh 14 is assigned to MPI Process 13
+ Mesh 15 is assigned to MPI Process 14
+ Mesh 16 is assigned to MPI Process 15
+ Input file read
+ OpenMP thread   0 of   3 assigned to MPI process      9 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     13 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     14 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     14 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     14 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     14 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      2 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      2 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      2 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      2 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     15 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     15 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      4 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      4 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      6 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      6 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      3 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      8 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      8 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      8 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      8 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      5 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      5 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     10 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     10 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     10 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     10 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     11 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     11 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     11 of     15
+ OpenMP thread   0 of   3 assigned to MPI process     12 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     12 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     12 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      0 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      0 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      0 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      1 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      1 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      4 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      7 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      7 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      6 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     15 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     15 of     15
+ OpenMP thread   0 of   3 assigned to MPI process      7 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     12 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      9 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      9 of     15
+ OpenMP thread   1 of   3 assigned to MPI process     13 of     15
+ OpenMP thread   3 of   3 assigned to MPI process     13 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     13 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      0 of     15
+ Completed Initialization Step  1
+ OpenMP thread   3 of   3 assigned to MPI process      6 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      1 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      4 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      3 of     15
+ OpenMP thread   3 of   3 assigned to MPI process      5 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      5 of     15
+ OpenMP thread   2 of   3 assigned to MPI process     11 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      7 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      9 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      1 of     15
+ OpenMP thread   1 of   3 assigned to MPI process      3 of     15
+ OpenMP thread   2 of   3 assigned to MPI process      3 of     15
+ Completed Initialization Step  2
+ Completed Initialization Step  3
+ Completed Initialization Step  4
+ Completed SETUP_PRESSURE_ZONES
+ Completed INITIALIZE_MESH_EXCHANGE_2
+ Completed INITIALIZE_MESH_VARIABLES_2
+ Initialized Radiation
+ Inserted particles
+
+ Fire Dynamics Simulator
+
+ Current Date     : June 17, 2020  15:17:43
+ Revision         : FDS6.7.4-531-g013be8a-master
+ Revision Date    : Mon Jun 1 22:12:40 2020 -0400
+ Compiler         : Gnu gfortran 9.2.0
+ Compilation Date : Jun 02, 2020  17:39:49
+
+ MPI Enabled;    Number of MPI Processes:      16
+ OpenMP Enabled; Number of OpenMP Threads:      4
+
+ MPI version: 3.1
+ MPI library version: Open MPI v3.1.2, package: Open MPI leobardovalera@tellico-master0 Distribution, ident: 3.1.2, repo rev: v3.1.2, Aug 22, 2018
+
+ Job TITLE        : Simulation of Chimney Tops fire
+ Job ID string    : Chimney_tops_1m
+
+ Called INITIALIZE_GLOBAL_DUMPS
+ Called DUMP_MESH_OUTPUTS
+ Start the time-stepping loop
+ Time Step:      1, Simulation Time:      0.10 s
+ Time Step:      2, Simulation Time:      0.20 s
+ Time Step:      3, Simulation Time:      0.30 s
+ Time Step:      4, Simulation Time:      0.40 s
+ Time Step:      5, Simulation Time:      0.50 s
+ Time Step:      6, Simulation Time:      0.60 s
+ Time Step:      7, Simulation Time:      0.70 s
+ Time Step:      8, Simulation Time:      0.80 s
+ Time Step:      9, Simulation Time:      0.90 s
+ Time Step:     10, Simulation Time:      1.00 s
+ Time Step:     20, Simulation Time:      2.00 s
+ Time Step:     30, Simulation Time:      3.00 s
+ Time Step:     40, Simulation Time:      4.00 s
+ Time Step:     50, Simulation Time:      5.00 s
+ Time Step:     60, Simulation Time:      6.00 s
+ Time Step:     70, Simulation Time:      7.00 s
+ Time Step:     80, Simulation Time:      8.00 s
+ Time Step:     90, Simulation Time:      9.00 s
+ Time Step:    100, Simulation Time:     10.00 s
+ Time Step:    200, Simulation Time:     20.00 s
+ Time Step:    300, Simulation Time:     30.00 s
+ Time Step:    400, Simulation Time:     40.00 s
+ Time Step:    500, Simulation Time:     50.00 s
+ Time Step:    600, Simulation Time:     60.00 s
+ Time Step:    700, Simulation Time:     70.00 s
+ Time Step:    800, Simulation Time:     80.00 s
+ Time Step:    900, Simulation Time:     90.00 s
+ Time Step:   1000, Simulation Time:    100.00 s
+ Time Step:   1100, Simulation Time:    110.00 s
+ Time Step:   1200, Simulation Time:    120.00 s
+ Time Step:   1300, Simulation Time:    130.00 s
+ Time Step:   1400, Simulation Time:    140.00 s
+ Time Step:   1500, Simulation Time:    150.00 s
+ Time Step:   1600, Simulation Time:    160.00 s
+ Time Step:   1700, Simulation Time:    170.00 s
+ Time Step:   1800, Simulation Time:    180.00 s
+ Time Step:   1900, Simulation Time:    190.00 s
+ Time Step:   2000, Simulation Time:    200.00 s
+ Time Step:   2100, Simulation Time:    210.00 s
+ Time Step:   2200, Simulation Time:    220.00 s
+ Time Step:   2300, Simulation Time:    230.00 s
+ Time Step:   2400, Simulation Time:    240.00 s
+ Time Step:   2500, Simulation Time:    250.00 s
+ Time Step:   2600, Simulation Time:    260.00 s
+ Time Step:   2700, Simulation Time:    270.00 s
+ Time Step:   2800, Simulation Time:    280.00 s
+ Time Step:   2900, Simulation Time:    290.00 s
+ Time Step:   3000, Simulation Time:    300.00 s
+ MPI process     11 has completed
+ MPI process     12 has completed
+ MPI process      7 has completed
+ MPI process     13 has completed
+ MPI process     14 has completed
+ MPI process      2 has completed
+ MPI process      3 has completed
+ MPI process      6 has completed
+ MPI process      9 has completed
+ MPI process     15 has completed
+ MPI process      4 has completed
+ MPI process      8 has completed
+ MPI process      1 has completed
+ MPI process     10 has completed
+ MPI process      5 has completed
+ MPI process      0 has completed
+
+STOP: FDS completed successfully (CHID: Chimney_tops_1m)

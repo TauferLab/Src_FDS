@@ -1,0 +1,288 @@
+ MPI Process     11 started on tellico-compute0
+ MPI Process     21 started on tellico-compute0
+ MPI Process     22 started on tellico-compute0
+ MPI Process     25 started on tellico-compute0
+ MPI Process     26 started on tellico-compute0
+ MPI Process     29 started on tellico-compute0
+ MPI Process      1 started on tellico-compute0
+ MPI Process      5 started on tellico-compute0
+ MPI Process      6 started on tellico-compute0
+ MPI Process      7 started on tellico-compute0
+ MPI Process     13 started on tellico-compute0
+ MPI Process     14 started on tellico-compute0
+ MPI Process     17 started on tellico-compute0
+ MPI Process     19 started on tellico-compute0
+
+ Starting FDS ...
+
+ MPI Process      0 started on tellico-compute0
+ MPI Process      2 started on tellico-compute0
+ MPI Process      3 started on tellico-compute0
+ MPI Process      4 started on tellico-compute0
+ MPI Process      8 started on tellico-compute0
+ MPI Process      9 started on tellico-compute0
+ MPI Process     10 started on tellico-compute0
+ MPI Process     31 started on tellico-compute0
+ MPI Process     12 started on tellico-compute0
+ MPI Process     15 started on tellico-compute0
+ MPI Process     16 started on tellico-compute0
+ MPI Process     18 started on tellico-compute0
+ MPI Process     20 started on tellico-compute0
+ MPI Process     23 started on tellico-compute0
+ MPI Process     24 started on tellico-compute0
+ MPI Process     27 started on tellico-compute0
+ MPI Process     28 started on tellico-compute0
+ MPI Process     30 started on tellico-compute0
+
+ Reading FDS input file ...
+
+ Mesh 1 is assigned to MPI Process 0
+ Mesh 2 is assigned to MPI Process 1
+ Mesh 3 is assigned to MPI Process 2
+ Mesh 4 is assigned to MPI Process 3
+ Mesh 5 is assigned to MPI Process 4
+ Mesh 6 is assigned to MPI Process 5
+ Mesh 7 is assigned to MPI Process 6
+ Mesh 8 is assigned to MPI Process 7
+ Mesh 9 is assigned to MPI Process 8
+ Mesh 10 is assigned to MPI Process 9
+ Mesh 11 is assigned to MPI Process 10
+ Mesh 12 is assigned to MPI Process 11
+ Mesh 13 is assigned to MPI Process 12
+ Mesh 14 is assigned to MPI Process 13
+ Mesh 15 is assigned to MPI Process 14
+ Mesh 16 is assigned to MPI Process 15
+ Mesh 17 is assigned to MPI Process 16
+ Mesh 18 is assigned to MPI Process 17
+ Mesh 19 is assigned to MPI Process 18
+ Mesh 20 is assigned to MPI Process 19
+ Mesh 21 is assigned to MPI Process 20
+ Mesh 22 is assigned to MPI Process 21
+ Mesh 23 is assigned to MPI Process 22
+ Mesh 24 is assigned to MPI Process 23
+ Mesh 25 is assigned to MPI Process 24
+ Mesh 26 is assigned to MPI Process 25
+ Mesh 27 is assigned to MPI Process 26
+ Mesh 28 is assigned to MPI Process 27
+ Mesh 29 is assigned to MPI Process 28
+ Mesh 30 is assigned to MPI Process 29
+ Mesh 31 is assigned to MPI Process 30
+ Mesh 32 is assigned to MPI Process 31
+ Input file read
+ OpenMP thread   0 of   3 assigned to MPI process     19 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     19 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     29 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     29 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     29 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     29 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     30 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     30 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     30 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     30 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      2 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      2 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      2 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      2 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      3 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      3 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      3 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      3 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      1 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      1 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      1 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      1 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      5 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      5 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      6 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      6 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      6 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      4 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      4 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      4 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      8 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      8 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      9 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      9 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      9 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      9 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     10 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     10 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     10 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     10 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     31 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     31 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     31 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     31 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      7 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      7 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      7 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      7 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     13 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     13 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     13 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     13 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     12 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     12 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     12 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     15 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     15 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     15 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     15 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     14 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     14 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     14 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     16 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     16 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     16 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     16 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     17 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     17 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     17 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     18 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     18 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     18 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     11 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     11 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     11 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     11 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     21 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     21 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     21 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     21 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     20 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     20 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     20 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     20 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     23 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     23 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     23 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     22 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     22 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     22 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     22 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     25 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     25 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     25 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     25 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     24 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     24 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     24 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     24 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     27 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     27 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     27 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     27 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     26 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     26 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     26 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     26 of     31
+ OpenMP thread   0 of   3 assigned to MPI process     28 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     28 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     28 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     28 of     31
+ OpenMP thread   0 of   3 assigned to MPI process      0 of     31
+ OpenMP thread   2 of   3 assigned to MPI process      0 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      0 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      0 of     31
+ Completed Initialization Step  1
+ OpenMP thread   3 of   3 assigned to MPI process     19 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      6 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      8 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     12 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     17 of     31
+ OpenMP thread   2 of   3 assigned to MPI process     18 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      4 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      5 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     19 of     31
+ OpenMP thread   3 of   3 assigned to MPI process      5 of     31
+ OpenMP thread   3 of   3 assigned to MPI process     14 of     31
+ OpenMP thread   1 of   3 assigned to MPI process      8 of     31
+ OpenMP thread   1 of   3 assigned to MPI process     23 of     31
+ Completed Initialization Step  2
+ Completed Initialization Step  3
+ Completed Initialization Step  4
+ Completed SETUP_PRESSURE_ZONES
+ Completed INITIALIZE_MESH_EXCHANGE_2
+ Completed INITIALIZE_MESH_VARIABLES_2
+ Initialized Radiation
+ Inserted particles
+
+ Fire Dynamics Simulator
+
+ Current Date     : June 22, 2020  12:38:43
+ Revision         : FDS6.7.4-531-g013be8a-master
+ Revision Date    : Mon Jun 1 22:12:40 2020 -0400
+ Compiler         : Gnu gfortran 9.2.0
+ Compilation Date : Jun 02, 2020  17:39:49
+
+ MPI Enabled;    Number of MPI Processes:      32
+ OpenMP Enabled; Number of OpenMP Threads:      4
+
+ MPI version: 3.1
+ MPI library version: Open MPI v3.1.2, package: Open MPI leobardovalera@tellico-master0 Distribution, ident: 3.1.2, repo rev: v3.1.2, Aug 22, 2018
+
+ Job TITLE        : Simulation of Chimney Tops fire
+ Job ID string    : Chimney_tops_1m
+
+ Called INITIALIZE_GLOBAL_DUMPS
+ Called DUMP_MESH_OUTPUTS
+ Start the time-stepping loop
+ Time Step:      1, Simulation Time:      0.10 s
+ Time Step:      2, Simulation Time:      0.15 s
+ Time Step:      3, Simulation Time:      0.19 s
+ Time Step:      4, Simulation Time:      0.25 s
+ Time Step:      5, Simulation Time:      0.31 s
+ Time Step:      6, Simulation Time:      0.38 s
+ Time Step:      7, Simulation Time:      0.45 s
+ Time Step:      8, Simulation Time:      0.53 s
+ Time Step:      9, Simulation Time:      0.62 s
+ Time Step:     10, Simulation Time:      0.71 s
+ Time Step:     20, Simulation Time:      1.50 s
+ Time Step:     30, Simulation Time:      2.21 s
+ Time Step:     40, Simulation Time:      2.84 s
+ Time Step:     50, Simulation Time:      3.39 s
+ Time Step:     60, Simulation Time:      3.84 s
+ Time Step:     70, Simulation Time:      4.24 s
+ Time Step:     80, Simulation Time:      4.59 s
+ Time Step:     90, Simulation Time:      4.90 s
+ Time Step:    100, Simulation Time:      5.18 s
+ Time Step:    200, Simulation Time:      7.08 s
+ Time Step:    300, Simulation Time:      8.19 s
+ Time Step:    400, Simulation Time:      8.95 s
+ Time Step:    500, Simulation Time:      9.53 s
+ Time Step:    600, Simulation Time:      9.99 s
+ Time Step:    603, Simulation Time:     10.00 s
+ MPI process     28 has completed
+ MPI process     23 has completed
+ MPI process     29 has completed
+ MPI process     30 has completed
+ MPI process      2 has completed
+ MPI process      3 has completed
+ MPI process      1 has completed
+ MPI process      4 has completed
+ MPI process     19 has completed
+ MPI process     18 has completed
+ MPI process      6 has completed
+ MPI process      9 has completed
+ MPI process     10 has completed
+ MPI process     31 has completed
+ MPI process      7 has completed
+ MPI process     13 has completed
+ MPI process     14 has completed
+ MPI process     15 has completed
+ MPI process      5 has completed
+ MPI process     16 has completed
+ MPI process     12 has completed
+ MPI process     17 has completed
+ MPI process     11 has completed
+ MPI process     21 has completed
+ MPI process     20 has completed
+ MPI process      8 has completed
+ MPI process     22 has completed
+ MPI process     25 has completed
+ MPI process     24 has completed
+ MPI process     27 has completed
+ MPI process     26 has completed
+ MPI process      0 has completed
+
+STOP: FDS completed successfully (CHID: Chimney_tops_1m)

@@ -1,0 +1,84 @@
+ Initialization time:  101.735 seconds
+
+ Initialization time:  101.736 seconds
+
+ Initialization time:  101.733 seconds
+
+ Initialization time:  101.736 seconds
+
+ Initialization time:  101.697 seconds
+
+ Initialization time:  101.752 seconds
+
+ Initialization time:  101.746 seconds
+
+ Initialization time:  101.749 seconds
+
+ Initialization time:  101.746 seconds
+
+ Initialization time:  101.752 seconds
+
+ Initialization time:  101.746 seconds
+
+ Initialization time:  101.748 seconds
+
+ Initialization time:  101.736 seconds
+
+ Initialization time:  101.735 seconds
+
+ Initialization time:  101.695 seconds
+
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@tellico-compute1>
+Subject: Job 18932: <mesh_> in cluster <tellico> Done
+
+Job <mesh_> was submitted from host <tellico-master1> by user <leobardovalera> in cluster <tellico> at Wed Jun 17 15:07:48 2020
+Job was executed on host(s) <tellico-compute1>, in queue <normal>, as user <leobardovalera> in cluster <tellico> at Wed Jun 17 15:07:48 2020
+</home/leobardovalera> was used as the home directory.
+</home/leobardovalera/experiments> was used as the working directory.
+Started at Wed Jun 17 15:07:48 2020
+Terminated at Wed Jun 17 15:12:37 2020
+Results reported at Wed Jun 17 15:12:37 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -n 1
+#BSUB -J mesh_
+###BSUB -x
+###BSUB -R "span[hosts=1]"
+#BSUB -o /home/leobardovalera/experiments/mesh_%J.out
+#BSUB -e /home/leobardovalera/experiments/mesh_%J.err
+##BSUB -W 1:00
+
+export OMP_NUM_THREADS=4
+mpiexec -n 16 ~/fds/Build/mpi_gnu_linux_64/fds_mpi_gnu_linux_64 FDSPROG_3m.fds
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   7929.73 sec.
+    Max Memory :                                 50927 MB
+    Average Memory :                             39962.95 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              20
+    Max Threads :                                105
+    Run time :                                   288 sec.
+    Turnaround time :                            289 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </home/leobardovalera/experiments/mesh_18932.err> for stderr output of this job.
+
