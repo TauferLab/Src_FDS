@@ -1,0 +1,36 @@
+Experiment done: 2020/06/22/ at 12:32:20
+
+Terrain Domain  = [450, 550] x [450, 550]
+Elevation Range = [1200, 1325]
+
+Resolution = 1 meters 
+
+Number of Meshes = 32 
+Number of Cells = 1260000 
+Required Memory = 2 GB 
+
+Simulation Time     = 10.0 
+Time Step Size      = 0.1 
+Number of Frames    = 20 
+
+Predictor Corrector Strategy = 1 
+
+&RAMP ID='fire', T= 0., F=0. /
+&RAMP ID='fire', T= 1., F=1. /
+&RAMP ID='fire', T= 30., F=1. /
+&RAMP ID='fire', T= 31., F=1. /
+
+Coordinates of the Fire   = [499, 499]
+
+Resource usage summary:
+
+    CPU time :                                   25475.76 sec.
+    Max Memory :                                 7048 MB
+    Average Memory :                             6101.48 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   30 MB
+    Max Processes :                              36
+    Max Threads :                                201
+    Run time :                                   431 sec.
+    Turnaround time :                            433 sec.
