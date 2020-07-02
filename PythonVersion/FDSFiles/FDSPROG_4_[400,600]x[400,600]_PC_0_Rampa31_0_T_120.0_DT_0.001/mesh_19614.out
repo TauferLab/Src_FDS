@@ -1,0 +1,115 @@
+ Initialization time:   11.953 seconds
+
+ Initialization time:   11.956 seconds
+
+ Initialization time:   11.952 seconds
+
+ Initialization time:   11.959 seconds
+
+ Initialization time:   11.953 seconds
+
+ Initialization time:   11.956 seconds
+
+ Initialization time:   11.952 seconds
+
+ Initialization time:   11.956 seconds
+
+ Initialization time:   11.952 seconds
+
+ Initialization time:   11.954 seconds
+
+ Initialization time:   11.949 seconds
+
+ Initialization time:   11.951 seconds
+
+ Initialization time:   11.941 seconds
+
+ Initialization time:   11.943 seconds
+
+ Initialization time:   11.941 seconds
+
+ Initialization time:   11.933 seconds
+
+ Initialization time:   11.937 seconds
+
+ Initialization time:   11.928 seconds
+
+ Initialization time:   11.932 seconds
+
+ Initialization time:   11.921 seconds
+
+ Initialization time:   11.922 seconds
+
+ Initialization time:   11.918 seconds
+
+ Initialization time:   11.926 seconds
+
+ Initialization time:   11.918 seconds
+
+ Initialization time:   11.919 seconds
+
+ Initialization time:   11.912 seconds
+
+ Initialization time:   11.917 seconds
+
+ Initialization time:   11.915 seconds
+
+ Initialization time:   11.911 seconds
+
+ Initialization time:   11.906 seconds
+
+ Initialization time:   11.908 seconds
+
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@tellico-compute0>
+Subject: Job 19614: <mesh_> in cluster <tellico> Done
+
+Job <mesh_> was submitted from host <tellico-master1> by user <leobardovalera> in cluster <tellico> at Thu Jun 25 18:51:19 2020
+Job was executed on host(s) <tellico-compute0>, in queue <normal>, as user <leobardovalera> in cluster <tellico> at Thu Jun 25 18:51:19 2020
+</home/leobardovalera> was used as the home directory.
+</home/leobardovalera/experiments> was used as the working directory.
+Started at Thu Jun 25 18:51:19 2020
+Terminated at Thu Jun 25 22:02:52 2020
+Results reported at Thu Jun 25 22:02:52 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -n 1
+#BSUB -J mesh_
+###BSUB -x
+###BSUB -R "span[hosts=1]"
+#BSUB -o /home/leobardovalera/experiments/mesh_%J.out
+#BSUB -e /home/leobardovalera/experiments/mesh_%J.err
+##BSUB -W 1:00
+
+export OMP_NUM_THREADS=4
+mpiexec -n 32 ~/fds/Build/mpi_gnu_linux_64/fds_mpi_gnu_linux_64 FDSPROG_4_[400,600]x[400,600]_PC_0_Rampa31_0_T_120.0_DT_0.001.fds
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   792534.12 sec.
+    Max Memory :                                 87747 MB
+    Average Memory :                             48312.84 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              36
+    Max Threads :                                201
+    Run time :                                   11492 sec.
+    Turnaround time :                            11493 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </home/leobardovalera/experiments/mesh_19614.err> for stderr output of this job.
+
