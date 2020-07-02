@@ -1,0 +1,23 @@
+Experiment done: 2020/06/26/ at 13:13:49
+
+Terrain Domain  = [0, 1000] x [0, 1000]
+Elevation Range = [900, 1464]
+
+Resolution = 2 meters 
+
+Number of Meshes = 32 
+Number of Cells = 70500000 
+Required Memory = 71 GB 
+
+Simulation Time     = 10.0 
+Time Step Size      = 0.01 
+Number of Frames    = 20 
+
+Predictor Corrector Strategy = 0 
+
+&RAMP ID='fire', T= 0., F=0. /
+&RAMP ID='fire', T= 1., F=1. /
+&RAMP ID='fire', T= 30., F=1. /
+&RAMP ID='fire', T= 31., F=0. /
+
+Coordinates of the Fire   = [499, 499]
