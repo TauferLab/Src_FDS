@@ -40,5 +40,4 @@
 
 ### Once done...
 
-- Once you are done writing your .bsub file, you will have to write the following command to run the job script:
-`bsub < bsubFileName.bsub'
+Once you are done writing your .bsub file, you will have to write the following command to run the job script: `bsub < bsubFileName.bsub'
