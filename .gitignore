@@ -1,3 +1,18 @@
+*.binfo
+*.bnd
+*.end
+*.err
+*.fds
+*.csv
+*.out
+*.png
+*.prt5
+*.s3d
+*.sf
+*.sinfo
+*.s3d*
+*.ter
+*.avi
 *.pdf
 *.doc
 *.docx
@@ -10,7 +25,6 @@
 *.fds
 *.tif*
 *.nc
-
 *.tar
 *.zip
 *.7z
