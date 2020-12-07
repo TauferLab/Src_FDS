@@ -27,7 +27,11 @@ def read_elevation(name_of_file):
 
 # Writing the FDS file
 
-def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz):
+def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location):
+    global fds
+    global job_log
+    global foldername
+    global filename
     NFRAMES  = int(2*(T_end-T_begin))
     #NFRAMES  = 40
 
@@ -164,10 +168,15 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz):
     fds.write("&SURF ID = 'surf2', RGB = 0,100,0, MATL_ID='DIRT', THICKNESS=0.2 / \n\n")
     rows = Mst_o.shape[0]
     # Position of the ignition point
-    Location = [500,100]
     # Locating that position in the Moisture File
     Indice = Mst_o[(Mst_o['x'] < Location[0]+5) & (Mst_o['x'] > Location[0]-5) & (Mst_o['y'] < Location[1]+5) & (Mst_o['y'] > Location[1]-5)].index
     Indice2 = [i for i in Mst_o.index if i not in Indice.values]
+    write_obstacles(Indice, Indice2)
+
+#################################################################################################################################
+# Defining the position of the initial fire and the obstacles
+    
+def write_obstacles(Indice, Indice2):
 
     job_log.write(f"Coordinates of the Fire   = {Location}")
     # Writing the location of the fire
@@ -201,5 +210,3 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz):
     fds.close()
     job_log.close()
     bsub.close()
-    
-
