@@ -210,3 +210,18 @@ def write_obstacles(Indice, Indice2):
     fds.close()
     job_log.close()
     bsub.close()
+    
+###############################################################################################################
+
+## Bash/system/OS interaction.
+
+import sys
+import os
+import subprocess
+from subprocess import Popen
+
+def bash(argv):
+    arg_seq = [str(arg) for arg in argv]
+    #print(arg_seq)
+    proc = Popen(arg_seq)#, shell=True)
+    proc.wait() #... unless intentionally asynchronous
