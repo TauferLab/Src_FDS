@@ -27,7 +27,7 @@ def read_elevation(name_of_file):
 
 # Writing the FDS file
 
-def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location):
+def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child):
     global fds
     global job_log
     global foldername
@@ -62,7 +62,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location):
     DZ  = (Max_z-Min_z)/Nmz
 
     job_log.write(f"Number of Meshes = {Nmx*Nmy*Nmz} \n")
-    fds.write(f"&HEAD CHID='Region_1_{R}m', TITLE='Simulation of Chimney Tops fire' /\n\n")
+    fds.write(f"&HEAD CHID={Child}, TITLE='Simulation of Chimney Tops fire' /\n\n")
     Nx = math.ceil(DX/R)     # Number of cells in x-direction first mesh (Resolution)
     Ny = math.ceil(DY/R)     # Number of cells in y-direction first mesh (Resolution)
     Nz = math.ceil(DZ/R)     # Number of cells in z-direction first mesh (Resolution)
@@ -227,3 +227,30 @@ def bash(argv):
     #print(arg_seq)
     proc = Popen(arg_seq)#, shell=True)
     proc.wait() #... unless intentionally asynchronous
+    
+###############################################################################################################
+
+def reading_hrr(Child, Number_of_meshes):
+    filename_txt           = f"fds2ascii.txt"
+    fds2ascii_filename = f"FDSFiles/{foldername}/{filename_txt}"
+    fds2ascii          = open(fds2ascii_filename, 'w')
+
+    fds2ascii.write(f"{Child} \n")
+    fds2ascii.write(f"1\n")
+    fds2ascii.write(f"1\n")
+    fds2ascii.write(f"n\n")
+    for i in range(1,Number_of_meshes+1):
+        fds2ascii.write(f"{i}\n")
+        fds2ascii.write(f"{Child}_{i}.csv\n")
+    fds2ascii.write(f"0\n")
+    fds2ascii.close()
+
+    #####################################################################
+    filename_sh                = f"fds2ascii.sh"
+    fds2ascii_sh_file       = f"FDSFiles/{foldername}/{filename_sh}"
+    fds2ascii_sh            = open(fds2ascii_sh_file, 'w')
+    fds2ascii_sh.write(f"#!/bin/bash\n\n")
+    fds2ascii_sh.write(f"{Bin_folder}/fds2ascii < {filename_txt}")
+    fds2ascii_sh.close()
+    os.chdir(FDS_FOLDER)
+    bash([f"./fds2ascii.sh"])
