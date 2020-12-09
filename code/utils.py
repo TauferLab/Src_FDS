@@ -27,7 +27,7 @@ def read_elevation(name_of_file):
 
 # Writing the FDS file
 
-def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child):
+def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA):
     global fds
     global job_log
     global foldername
@@ -78,7 +78,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child):
     else:
         fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D=10. /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D={int(T_end)}. /  \n")
 
     job_log.write(f"Simulation Time     = {T_end} \n")
     job_log.write(f"Time Step Size      = {DT} \n")
@@ -87,7 +87,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child):
     job_log.write(f"Predictor Corrector Strategy = {PC} \n\n")
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
-    fds.write(f"&SURF ID='FIRE', HRRPUA=1500., COLOR='ORANGE', RAMP_Q='fire' /\n")
+    fds.write(f"&SURF ID='FIRE', HRRPUA={HRRPUA}., COLOR='ORANGE', RAMP_Q='fire' /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=0. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+1)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=1. /\n")
