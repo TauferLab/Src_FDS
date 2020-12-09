@@ -78,7 +78,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location):
     else:
         fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D=60. /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D=10. /  \n")
 
     job_log.write(f"Simulation Time     = {T_end} \n")
     job_log.write(f"Time Step Size      = {DT} \n")
@@ -177,7 +177,9 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location):
 # Defining the position of the initial fire and the obstacles
     
 def write_obstacles(Indice, Indice2):
-
+    # Indice of the obstacles on fire
+    # Indice2 are the index of the obstacles without fire
+    
     job_log.write(f"Coordinates of the Fire   = {Location}")
     # Writing the location of the fire
     for ind in Indice.values:
