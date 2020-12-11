@@ -27,7 +27,7 @@ def read_elevation(name_of_file):
 
 # Writing the FDS file
 
-def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA):
+def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Indice, Indice2, Child, HRRPUA):
     global fds
     global job_log
     global foldername
@@ -38,8 +38,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA
     # Output File
     PC = 1       # Select to use Predictor-Corrector Strategy
 
-    foldername = f"FDSPROG_{R}_Ro_{Ro}_[{Min_x},{Max_x}]x[{Min_y},{Max_y}]_PC_{PC}_T_{T_end}_DT_{DT}"
-    filename = f"{foldername}.fds"
+
     logname = f"{foldername}.log"
 
     if not path.exists(f"FDSFiles/{foldername}"):
@@ -62,7 +61,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA
     DZ  = (Max_z-Min_z)/Nmz
 
     job_log.write(f"Number of Meshes = {Nmx*Nmy*Nmz} \n")
-    fds.write(f"&HEAD CHID={Child}, TITLE='Simulation of Chimney Tops fire' /\n\n")
+    fds.write(f"&HEAD CHID='{Child}', TITLE='Simulation of Chimney Tops fire' /\n\n")
     Nx = math.ceil(DX/R)     # Number of cells in x-direction first mesh (Resolution)
     Ny = math.ceil(DY/R)     # Number of cells in y-direction first mesh (Resolution)
     Nz = math.ceil(DZ/R)     # Number of cells in z-direction first mesh (Resolution)
@@ -88,7 +87,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     fds.write(f"&SURF ID='FIRE', HRRPUA={HRRPUA}., COLOR='ORANGE', RAMP_Q='fire' /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=0. /\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+1)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+31)}., F=0. /\n\n")
@@ -169,8 +168,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Location, Child,HRRPUA
     rows = Mst_o.shape[0]
     # Position of the ignition point
     # Locating that position in the Moisture File
-    Indice = Mst_o[(Mst_o['x'] < Location[0]+5) & (Mst_o['x'] > Location[0]-5) & (Mst_o['y'] < Location[1]+5) & (Mst_o['y'] > Location[1]-5)].index
-    Indice2 = [i for i in Mst_o.index if i not in Indice.values]
+    
     write_obstacles(Indice, Indice2)
 
 #################################################################################################################################
