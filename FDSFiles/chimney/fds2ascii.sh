@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/mnt/d/Dropbox/Documents/Dr_Taufer_Lab/experiments/Src_FDS/Bin/fds2ascii < fds2ascii.txt
+/home/rpatel77/Src_FDS/Bin/fds2ascii < fds2ascii.txt
