@@ -27,76 +27,56 @@ def read_elevation(name_of_file):
 
 # Writing the FDS file
 
-def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Indice, Indice2, Child, HRRPUA):
+def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     global fds
     global job_log
     global foldername
     global filename
     NFRAMES  = int(2*(T_end-T_begin))
-    #NFRAMES  = 40
 
     # Output File
-    PC = 1       # Select to use Predictor-Corrector Strategy
+    Indice = Hrr.index
+    Indice2 = [i for i in Mst.index if i not in Indice.values]
 
-
-    logname = f"{foldername}.log"
-
+    if not path.exists(f"FDSFiles"):
+            os.mkdir(f"FDSFiles")
+    
     if not path.exists(f"FDSFiles/{foldername}"):
             os.mkdir(f"FDSFiles/{foldername}")
-    log_name     = f"FDSFiles/{foldername}/{logname}"
+
     fds_filename = f"FDSFiles/{foldername}/{filename}"
     fds     = open(fds_filename, 'w')
-    job_log = open(log_name, 'w')
 
     ############################################################
-    Time = strftime("Experiment done: %Y/%m/%d/ at %H:%M:%S",localtime())
-    job_log.write(f"{Time}\n\n")
-
-    job_log.write(f"Terrain Domain  = [{Min_x}, {Max_x}] x [{Min_y}, {Max_y}]\n")
-    job_log.write(f"Elevation Range = [{Min_z}, {Max_z}]\n\n")
-
-    job_log.write(f"Resolution = {R} meters \n\n")
+   
     DX  = (Max_x-Min_x)/Nmx
     DY  = (Max_y-Min_y)/Nmy
     DZ  = (Max_z-Min_z)/Nmz
 
-    job_log.write(f"Number of Meshes = {Nmx*Nmy*Nmz} \n")
     fds.write(f"&HEAD CHID='{Child}', TITLE='Simulation of Chimney Tops fire' /\n\n")
     Nx = math.ceil(DX/R)     # Number of cells in x-direction first mesh (Resolution)
     Ny = math.ceil(DY/R)     # Number of cells in y-direction first mesh (Resolution)
     Nz = math.ceil(DZ/R)     # Number of cells in z-direction first mesh (Resolution)
 
-    job_log.write(f"Number of Cells = {Nx*Ny*Nz*Nmx*Nmy*Nmz} \n")
-    job_log.write(f"Required Memory = {math.ceil(Nx*Ny*Nz*Nmx*Nmy*Nmz/1000000)} GB \n\n")
     fds.write(f"&MESH IJK={Nx},{Ny},{Nz}, XB={Min_x},{Min_x+DX},{Min_y},{Min_y+DY},{Min_z},{Min_z+DZ}, MULT_ID='mesh' / \n")
     fds.write(f"&MULT ID='mesh', DX={DX}, DY={DY}, DZ={DZ}, I_LOWER=0, I_UPPER={Nmx-1}, J_LOWER=0, J_UPPER={Nmy-1}, K_UPPER={Nmz-1} /  \n\n")
     fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Chimney_tops_aerial.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
-
-    if PC==0:
-        fds.write(f"&TIME T_END = {T_end}, LOCK_TIME_STEP=.TRUE. /\n\n")
-    else:
-        fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
+    
+    fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
     fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D={int(T_end)}. /  \n")
 
-    job_log.write(f"Simulation Time     = {T_end} \n")
-    job_log.write(f"Time Step Size      = {DT} \n")
-    job_log.write(f"Number of Frames    = {NFRAMES} \n\n")
-
-    job_log.write(f"Predictor Corrector Strategy = {PC} \n\n")
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
-    fds.write(f"&SURF ID='FIRE', HRRPUA={HRRPUA}., COLOR='ORANGE', RAMP_Q='fire' /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=1. /\n")
+    for k in Hrr.index:
+        fds.write(f"&SURF ID='FIRE{k}', HRRPUA={math.ceil(Hrr['hrr'][k])}., COLOR='ORANGE', RAMP_Q='fire' /\n")
+    
+    fds.write(f"\n")
+    
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=0. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+1)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+31)}., F=0. /\n\n")
-
-    job_log.write(f"&RAMP ID='fire', T= 0., F=0. /\n")
-    job_log.write(f"&RAMP ID='fire', T= 1., F=1. /\n")
-    job_log.write(f"&RAMP ID='fire', T= 30., F=1. /\n")
-    job_log.write(f"&RAMP ID='fire', T= 31., F=0. /\n\n")
-
 
     fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
@@ -165,51 +145,28 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Indice, Indice2, Child
 
     fds.write("&SURF ID = 'surf1', RGB = 122,117,48, MATL_ID='DIRT', THICKNESS=0.2, PART_ID='grass', PARTICLE_SURFACE_DENSITY=1.0 / \n")
     fds.write("&SURF ID = 'surf2', RGB = 0,100,0, MATL_ID='DIRT', THICKNESS=0.2 / \n\n")
-    rows = Mst_o.shape[0]
-    # Position of the ignition point
-    # Locating that position in the Moisture File
     
-    write_obstacles(Indice, Indice2)
-
-#################################################################################################################################
-# Defining the position of the initial fire and the obstacles
+    ###################################################################################################################################
+    # Writing the obstacles
+    Mst_fire    = Mst.loc[Hrr.index.values]                              # Obstacles on fire
     
-def write_obstacles(Indice, Indice2):
-    # Indice of the obstacles on fire
-    # Indice2 are the index of the obstacles without fire
+    indice2 = [i for i in Mst.index.values if i not in Hrr.index.values] # Index of obstacles on fire 
     
-    job_log.write(f"Coordinates of the Fire   = {Location}")
+    Mst_no_fire = Mst.loc[indice2]                                       # Obstacles with no fire
+    
     # Writing the location of the fire
-    for ind in Indice.values:
-        #min_obstacle = max([Min_z0, Mst_o['Elevation'][ind]-Ro])
-        min_obstacle = Min_z
-        fds.write(f"&OBST XB={Mst_o['x'][ind]},{Mst_o['x'][ind]+Ro},{Mst_o['y'][ind]},{Mst_o['y'][ind]+Ro},{min_obstacle},{Mst_o['Elevation'][ind]} SURF_IDS='FIRE','surf1' /\n")
+    for ind in Mst_fire.index:
 
-    # Writing the obstacles  [x for x in xrange(100) if x != 50]
+        fds.write(f"&OBST XB={Mst_fire['x'][ind]},{Mst_fire['x'][ind]+Ro},{Mst_fire['y'][ind]},{Mst_fire['y'][ind]+Ro},{Min_z},{Mst_fire['Elevation'][ind]} SURF_IDS='FIRE{ind}','surf1' /\n")
+        
+    for ind in Mst_no_fire.index:
 
-    for i in Indice2: 
-        #min_obstacle = max([Min_z0, Mst_o['Elevation'][i]-Ro])
-        min_obstacle = Min_z
-        fds.write(f"&OBST XB={Mst_o['x'][i]},{Mst_o['x'][i]+Ro},{Mst_o['y'][i]},{Mst_o['y'][i]+Ro},{min_obstacle},{Mst_o['Elevation'][i]} SURF_ID='surf1'/\n")
-
-    fds.write("\n&TAIL /")
-    bsub_name     = f"FDSFiles/{foldername}/fds_testing.bsub"
-    bsub          = open(bsub_name, 'w')
-
-    bsub.write("#!/bin/bash\n")
-    bsub.write("#BSUB -n 1\n")
-    bsub.write("#BSUB -J mesh_\n")
-    bsub.write("###BSUB -x\n")
-    bsub.write('###BSUB -R "span[hosts=1]"\n')
-    bsub.write("#BSUB -o /home/leobardovalera/experiments/mesh_%J.out\n")
-    bsub.write("#BSUB -e /home/leobardovalera/experiments/mesh_%J.err\n")
-    bsub.write("##BSUB -W 1:00\n\n")
-
-    bsub.write("export OMP_NUM_THREADS=4\n")
-    bsub.write(f"mpiexec -n {Nmx*Nmy*Nmz} ~/fds/Build/mpi_gnu_linux_64/fds_mpi_gnu_linux_64 {filename}")
+        fds.write(f"&OBST XB={Mst_no_fire['x'][ind]},{Mst_no_fire['x'][ind]+Ro},{Mst_no_fire['y'][ind]},{Mst_no_fire['y'][ind]+Ro},{Min_z},{Mst_no_fire['Elevation'][ind]} SURF_ID='surf1' /\n")        
+    
+########################################################################################################################################
+    
+    
     fds.close()
-    job_log.close()
-    bsub.close()
     
 ###############################################################################################################
 
@@ -225,7 +182,7 @@ def bash(argv):
     #print(arg_seq)
     proc = Popen(arg_seq)#, shell=True)
     proc.wait() #... unless intentionally asynchronous
-    
+
 ###############################################################################################################
 
 def reading_hrr(Child, Number_of_meshes):
@@ -251,4 +208,4 @@ def reading_hrr(Child, Number_of_meshes):
     fds2ascii_sh.write(f"{Bin_folder}/fds2ascii < {filename_txt}")
     fds2ascii_sh.close()
     os.chdir(FDS_FOLDER)
-    bash([f"./fds2ascii.sh"])
+    bash([f"./fds2ascii.sh"])   
