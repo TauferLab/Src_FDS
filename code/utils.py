@@ -212,7 +212,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     for ind in Hrr.index:
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{Min_z},{math.ceil(Hrr['z'][ind])}, HRRPUV={math.ceil(Hrr['hrr'][ind])}., RAMP_Q='fire' /\n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind])},{math.ceil(Hrr['z'][ind])+(DZ/Nz)}, HRRPUV={math.ceil(Hrr['hrr'][ind])}., RAMP_Q='fire' /\n")
     
     fds.write(f"\n")
     
@@ -341,3 +341,21 @@ def reading_hrr(Child, Number_of_meshes):
     fds2ascii_sh.close()
     os.chdir(FDS_FOLDER)
     bash([f"./fds2ascii.sh"])   
+    
+    ##########################################################################
+    
+def remove_leading_space(file_name):
+# Open the file in read only mode
+    Temp_file     = open(f'{file_name[0:-4]}.tmp', 'w')
+    with open(file_name, 'r') as read_obj:
+        # Read all lines in the file one by one
+        for line in read_obj:
+            # For each line, check if line contains the string
+            if '.q' in line:
+                Temp_file.write(line.lstrip())
+            else:
+                Temp_file.write(line)
+    Temp_file.close()
+    os.system(f"rm {file_name}")
+    os.system(f"mv {file_name[0:-4]}.tmp {file_name}")
+    return 0
