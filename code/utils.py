@@ -38,13 +38,13 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     Indice = Hrr.index
     Indice2 = [i for i in Mst.index if i not in Indice.values]
 
-    if not path.exists(f"FDSFiles"):
-            os.mkdir(f"FDSFiles")
+    if not path.exists(f"{PATH}/FDSFiles"):
+            os.mkdir(f"{PATH}/FDSFiles")
     
-    if not path.exists(f"FDSFiles/{foldername}"):
-            os.mkdir(f"FDSFiles/{foldername}")
+    if not path.exists(f"{PATH}/FDSFiles/{foldername}"):
+            os.mkdir(f"{PATH}/FDSFiles/{foldername}")
 
-    fds_filename = f"FDSFiles/{foldername}/{filename}"
+    fds_filename = f"{PATH}/FDSFiles/{foldername}/{filename}"
     fds     = open(fds_filename, 'w')
 
     ############################################################
@@ -181,13 +181,13 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     Indice = Hrr.index
     Indice2 = [i for i in Mst.index if i not in Indice.values]
 
-    if not path.exists(f"FDSFiles"):
-            os.mkdir(f"FDSFiles")
+    if not path.exists(f"{PATH}/FDSFiles"):
+            os.mkdir(f"{PATH}/FDSFiles")
     
-    if not path.exists(f"FDSFiles/{foldername}"):
-            os.mkdir(f"FDSFiles/{foldername}")
+    if not path.exists(f"{PATH}/FDSFiles/{foldername}"):
+            os.mkdir(f"{PATH}/FDSFiles/{foldername}")
 
-    fds_filename = f"FDSFiles/{foldername}/{filename}"
+    fds_filename = f"{PATH}/FDSFiles/{foldername}/{filename}"
     fds     = open(fds_filename, 'w')
 
     ############################################################
@@ -319,32 +319,23 @@ def bash(argv):
 
 def reading_hrr(Child, Number_of_meshes):
     filename_txt           = f"fds2ascii.txt"
-    fds2ascii_filename = f"FDSFiles/{foldername}/{filename_txt}"
-    fds2ascii          = open(fds2ascii_filename, 'w')
+    fds2ascii_filename = f"{PATH}/FDSFiles/{foldername}/{filename_txt}"
+    f2a          = open(fds2ascii_filename, 'w')
 
-    fds2ascii.write(f"{Child} \n")
-    fds2ascii.write(f"1\n")
-    fds2ascii.write(f"1\n")
-    fds2ascii.write(f"n\n")
+    f2a.write(f"{Child} \n")
+    f2a.write(f"1\n")
+    f2a.write(f"1\n")
+    f2a.write(f"n\n")
     for i in range(1,Number_of_meshes+1):
-        fds2ascii.write(f"{i}\n")
-        fds2ascii.write(f"{Child}_{i}.csv\n")
-    fds2ascii.write(f"0\n")
-    fds2ascii.close()
+        f2a.write(f"{i}\n")
+        f2a.write(f"{Child}_{i}.csv\n")
+    f2a.write(f"0\n")
+    f2a.close()
     os.chdir(PATH)
     os.chdir(FDS_FOLDER)
-    os.system(f"fds2ascii < {filename_txt}")
-    #####################################################################
-    #filename_sh                = f"fds2ascii.sh"
-    #fds2ascii_sh_file       = f"FDSFiles/{foldername}/{filename_sh}"
-    #fds2ascii_sh            = open(fds2ascii_sh_file, 'w')
-    #fds2ascii_sh.write(f"#!/bin/bash\n\n")
-    #fds2ascii_sh.write(f"{Bin_folder}/fds2ascii < {filename_txt}")
-    #fds2ascii_sh.close()
-    #os.chdir(FDS_FOLDER)
-    #bash([f"./fds2ascii.sh"])   
+    os.system(f"{fds2ascii} < {filename_txt}")
     
-    ##########################################################################
+##########################################################################
     
 def remove_leading_space(file_name):
 # Open the file in read only mode
@@ -360,4 +351,4 @@ def remove_leading_space(file_name):
     Temp_file.close()
     os.system(f"rm {file_name}")
     os.system(f"mv {file_name[0:-4]}.tmp {file_name}")
-    return 0
+    return 0      
