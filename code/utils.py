@@ -64,7 +64,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D={int(T_end)}. /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}. /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
@@ -207,12 +207,12 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_RESTART=60., DT_PL3D={int(T_end)}. /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}. /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     for ind in Hrr.index:
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind])},{math.ceil(Hrr['z'][ind])+(DZ/Nz)}, HRRPUV={math.ceil(Hrr['hrr'][ind])}., RAMP_Q='fire' /\n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind])},{math.ceil(Hrr['z'][ind])+Ro}, HRRPUV={math.ceil(Hrr['hrr'][ind])}., RAMP_Q='fire' /\n")
     
     fds.write(f"\n")
     
