@@ -331,16 +331,18 @@ def reading_hrr(Child, Number_of_meshes):
         fds2ascii.write(f"{Child}_{i}.csv\n")
     fds2ascii.write(f"0\n")
     fds2ascii.close()
-
-    #####################################################################
-    filename_sh                = f"fds2ascii.sh"
-    fds2ascii_sh_file       = f"FDSFiles/{foldername}/{filename_sh}"
-    fds2ascii_sh            = open(fds2ascii_sh_file, 'w')
-    fds2ascii_sh.write(f"#!/bin/bash\n\n")
-    fds2ascii_sh.write(f"{Bin_folder}/fds2ascii < {filename_txt}")
-    fds2ascii_sh.close()
+    os.chdir(PATH)
     os.chdir(FDS_FOLDER)
-    bash([f"./fds2ascii.sh"])   
+    os.system(f"fds2ascii < {filename_txt}")
+    #####################################################################
+    #filename_sh                = f"fds2ascii.sh"
+    #fds2ascii_sh_file       = f"FDSFiles/{foldername}/{filename_sh}"
+    #fds2ascii_sh            = open(fds2ascii_sh_file, 'w')
+    #fds2ascii_sh.write(f"#!/bin/bash\n\n")
+    #fds2ascii_sh.write(f"{Bin_folder}/fds2ascii < {filename_txt}")
+    #fds2ascii_sh.close()
+    #os.chdir(FDS_FOLDER)
+    #bash([f"./fds2ascii.sh"])   
     
     ##########################################################################
     
