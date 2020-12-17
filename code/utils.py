@@ -379,5 +379,26 @@ def create_job_script_lsf(Child, num_nodes, max_time, omp_threads):
     
     return 0
 
-
+def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
+    # Create the job submission file for specific region
+    job_filename = f"job_{Child}.sh"
+    job_script = open(f"{PATH}/FDSFiles/{foldername}/{job_filename}", 'w')
+    
+    # Write the contents of the file
+    job_script.write("#!/bin/bash\n\n")
+    job_script.write(f"#SBATCH --nodes={num_nodes}\n")    # Number of compute nodes
+    job_script.write(f"#SBATCH --job-name=FDS_{Child}\n") # Job Name
+    
+    output_path = f'{PATH}/FDSFiles/{foldername}/FDS_{Child}_%j'
+    job_script.write(f"#SBATCH --output={output_path}.out\n")  # Job output file
+    job_script.write(f"#SBATCH --error={output_path}.err\n")  # Job error file
+    
+    job_script.write(f"#SBATCH --time={max_time}\n\n")       # Max time to run on compute node(s) - (d-hh:mm:ss)
+    
+    job_script.write(f"export OMP_NUM_THREADS={omp_threads}\n")                 # Number of OpenMP threads per process
+    job_script.write(f"mpiexec -n {number_of_process} {fds_bin} {filename}\n")  # Executes fds on input FDS file
+    
+    
+    
+    
     
