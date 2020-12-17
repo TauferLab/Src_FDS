@@ -338,8 +338,9 @@ def reading_hrr(Child, Number_of_meshes):
 ##########################################################################
     
 def remove_leading_space(file_name):
-# Open the file in read only mode
+    # Open the file in read only mode
     Temp_file     = open(f'{file_name[0:-4]}.tmp', 'w')
+    
     with open(file_name, 'r') as read_obj:
         # Read all lines in the file one by one
         for line in read_obj:
@@ -348,7 +349,35 @@ def remove_leading_space(file_name):
                 Temp_file.write(line.lstrip())
             else:
                 Temp_file.write(line)
+    
     Temp_file.close()
     os.system(f"rm {file_name}")
     os.system(f"mv {file_name[0:-4]}.tmp {file_name}")
-    return 0      
+    return 0    
+
+##########################################################################
+
+def create_job_script_lsf(Child, num_nodes, max_time, omp_threads):
+    
+    # Create the job submission file for specific region
+    job_filename = f"job_{Child}.bsub"
+    job_script = open(f"{PATH}/FDSFiles/{foldername}/{job_filename}", 'w')
+    
+    # Write the contents of the file
+    job_script.write("#!/bin/bash\n\n")
+    job_script.write(f"#BSUB -n {num_nodes}\n") # Number of compute nodes
+    job_script.write(f"#BSUB -J FDS_{Child}\n") # Job Name
+    
+    output_path = f'{PATH}/FDSFiles/{foldername}/FDS_{Child}_%J'
+    job_script.write(f"#BSUB -o {output_path}.out\n")  # Job output file
+    job_script.write(f"#BSUB -e {output_path}.err\n")  # Job error file
+    
+    job_script.write(f"#BSUB -W {max_time}\n\n")       # Maximum time to run on compute node(s)
+    
+    job_script.write(f"export OMP_NUM_THREADS={omp_threads}\n")                 # Number of OpenMP threads per process
+    job_script.write(f"mpiexec -n {number_of_process} {fds_bin} {filename}\n")  # Executes fds on input FDS file
+    
+    return 0
+
+
+    
