@@ -15,6 +15,7 @@ import os.path
 from os import path
 # from abstract_monitor import AbstractMonitor
 from lsf import LSFMonitor
+from slurm import SlurmMonitor
 
 
 ###################################################################################################
@@ -408,5 +409,12 @@ def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
 
 def wait_on_lsf():
     monitor = LSFMonitor(USER, jobs) 
-    monitor.wait_on_job(jobs[0])  # Waits for the job specified for the user to finish to run the rest of the notebook
+    monitor.wait_on_job(jobs[0])  # Waits for the job specified by the user to finish to run the rest of the notebook
+    return 0
+
+##########################################################################
+
+def wait_on_slurm():
+    monitor = SlurmMonitor(USER, jobs)
+    monitor.wait_on_job(jobs[0])  # Waits for the job specified by the user to finish to run the rest of the notebook
     return 0
