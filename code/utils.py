@@ -13,7 +13,9 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import time
 import os.path
 from os import path
-from time import time, strftime, gmtime, localtime
+# from abstract_monitor import AbstractMonitor
+from lsf import LSFMonitor
+
 
 ###################################################################################################
 # Function that reads the elevation file
@@ -366,9 +368,9 @@ def create_job_script_lsf(Child, num_nodes, max_time, omp_threads):
     # Write the contents of the file
     job_script.write("#!/bin/bash\n\n")
     job_script.write(f"#BSUB -n {num_nodes}\n") # Number of compute nodes
-    job_script.write(f"#BSUB -J FDS_{Child}\n") # Job Name
+    job_script.write(f"#BSUB -J {jobName}\n") # Job Name
     
-    output_path = f'{PATH}/FDSFiles/{foldername}/FDS_{Child}_%J'
+    output_path = f'{PATH}/FDSFiles/{foldername}/{jobName}_%J'
     job_script.write(f"#BSUB -o {output_path}.out\n")  # Job output file
     job_script.write(f"#BSUB -e {output_path}.err\n")  # Job error file
     
@@ -379,6 +381,8 @@ def create_job_script_lsf(Child, num_nodes, max_time, omp_threads):
     
     return 0
 
+##########################################################################
+
 def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
     # Create the job submission file for specific region
     job_filename = f"job_{Child}.sh"
@@ -387,9 +391,9 @@ def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
     # Write the contents of the file
     job_script.write("#!/bin/bash\n\n")
     job_script.write(f"#SBATCH --nodes={num_nodes}\n")    # Number of compute nodes
-    job_script.write(f"#SBATCH --job-name=FDS_{Child}\n") # Job Name
+    job_script.write(f"#SBATCH --job-name={jobName}\n") # Job Name
     
-    output_path = f'{PATH}/FDSFiles/{foldername}/FDS_{Child}_%j'
+    output_path = f'{PATH}/FDSFiles/{foldername}/{jobName}_%j'
     job_script.write(f"#SBATCH --output={output_path}.out\n")  # Job output file
     job_script.write(f"#SBATCH --error={output_path}.err\n")  # Job error file
     
@@ -398,7 +402,11 @@ def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
     job_script.write(f"export OMP_NUM_THREADS={omp_threads}\n")                 # Number of OpenMP threads per process
     job_script.write(f"mpiexec -n {number_of_process} {fds_bin} {filename}\n")  # Executes fds on input FDS file
     
+    return 0
     
-    
-    
-    
+##########################################################################
+
+def wait_on_lsf():
+    monitor = LSFMonitor(USER, jobs) 
+    monitor.wait_on_job(jobs[0])  # Waits for the job specified for the user to finish to run the rest of the notebook
+    return 0
