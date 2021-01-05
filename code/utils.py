@@ -418,3 +418,21 @@ def wait_on_slurm():
     monitor = SlurmMonitor(USER, jobs)
     monitor.wait_on_job(jobs[0])  # Waits for the job specified by the user to finish to run the rest of the notebook
     return 0
+
+#############################################################################
+
+def job_id(argv):
+    arg_seq = [str(arg) for arg in argv]
+    outfile = open('temp.csv', 'w');
+    proc = Popen(arg_seq, bufsize=0, stdout=outfile)
+    outfile.close()
+    proc.wait() #... unless intentionally 
+    
+    # Using readlines() 
+    file1 = open('temp.csv', 'r') 
+    Lines = file1.readlines() 
+    jobID = Lines[1].split()[0]
+    return jobID
+    
+    
+    
