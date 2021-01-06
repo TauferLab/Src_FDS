@@ -220,8 +220,8 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write(f"\n")
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin+15)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=0. /\n\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin+15)}., F=0. /\n")
+    #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=0. /\n\n")
 
     fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
@@ -421,7 +421,7 @@ def wait_on_slurm():
 
 #############################################################################
 
-def job_id(argv):
+def Get_job_id(argv):
     arg_seq = [str(arg) for arg in argv]
     outfile = open('temp.csv', 'w');
     proc = Popen(arg_seq, bufsize=0, stdout=outfile)
@@ -431,8 +431,8 @@ def job_id(argv):
     # Using readlines() 
     file1 = open('temp.csv', 'r') 
     Lines = file1.readlines() 
-    jobID = Lines[1].split()[0]
-    return jobID
+    job_id = Lines[1].split()[0]
+    return job_id
     
     
     
