@@ -391,17 +391,23 @@ def create_job_script_slurm(Child, num_nodes, max_time, omp_threads):
     
     # Write the contents of the file
     job_script.write("#!/bin/bash\n\n")
-    job_script.write(f"#SBATCH --nodes={num_nodes}\n")    # Number of compute nodes
-    job_script.write(f"#SBATCH --job-name={jobName}\n") # Job Name
+    job_script.write(f"#SBATCH --job-name={jobName}\n")         # Job Name 
     
     output_path = f'{PATH}/FDSFiles/{foldername}/{jobName}_%j'
-    job_script.write(f"#SBATCH --output={output_path}.out\n")  # Job output file
-    job_script.write(f"#SBATCH --error={output_path}.err\n")  # Job error file
+    job_script.write(f"#SBATCH --output={output_path}.out\n")   # Job output file
+    job_script.write(f"#SBATCH --error={output_path}.err\n")    # Job error file
     
-    job_script.write(f"#SBATCH --time={max_time}\n\n")       # Max time to run on compute node(s) - (d-hh:mm:ss)
+    job_script.write(f"#SBATCH --nodes={num_nodes}\n")          # Number of compute nodes
+    job_script.write(f"#SBATCH --ntasks={number_of_process}")   # Number of MPI processes
+    job_script.write(f"#SBATCH --time={max_time}\n\n")          # Max time to run on compute node(s) - (d-hh:mm:ss)
     
-    job_script.write(f"export OMP_NUM_THREADS={omp_threads}\n")                 # Number of OpenMP threads per process
-    job_script.write(f"mpiexec -n {number_of_process} {fds_bin} {filename}\n")  # Executes fds on input FDS file
+    #SBATCH --partition={partition}                             # Specified partition on TACC's Stampede2
+    
+    job_script.write(f"#SBATCH --mail-user={email}")
+    job_script.write(f"#SBATCH --mail-type=all")
+    
+    job_script.write(f"export OMP_NUM_THREADS={omp_threads}\n") # Number of OpenMP threads per process
+    job_script.write(f"ibrun {fds_bin} {filename}\n")           # Executes fds on input FDS file
     
     return 0
     
@@ -434,5 +440,6 @@ def Get_job_id(argv):
     job_id = Lines[1].split()[0]
     return job_id
     
+
     
     
