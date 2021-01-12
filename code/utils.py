@@ -210,7 +210,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}. /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)}. /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
