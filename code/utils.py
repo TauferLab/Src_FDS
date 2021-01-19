@@ -215,7 +215,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     for ind in Hrr.index:
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind])},{math.ceil(Hrr['z'][ind])+Ro}, HRRPUV={math.ceil(Hrr['hrr'][ind])}., RAMP_Q='fire' /\n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{Hrr['z'][ind]},{Hrr['z'][ind]+Ro}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
     
     fds.write(f"\n")
     
@@ -439,7 +439,4 @@ def Get_job_id(argv):
     Lines = file1.readlines() 
     job_id = Lines[1].split()[0]
     return job_id
-    
-
-    
-    
+###############################################################################
