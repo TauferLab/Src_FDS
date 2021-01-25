@@ -215,7 +215,14 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     for ind in Hrr.index:
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind]+5)},{math.ceil(Hrr['z'][ind])+Ro+5}, HRRPUV={math.ceil(Hrr['hrr'][ind])}, RAMP_Q='fire' /\n")
+        x = Hrr['x'][ind]
+        y = Hrr['y'][ind]            
+        elevation = return_elevation(Mst, x, y)
+        diferencia = elevation - Hrr['z'][ind]
+        if (diferencia>0):
+            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind]+diferencia)},{math.ceil(Hrr['z'][ind])+Ro+diferencia}, HRRPUV={math.ceil(Hrr['hrr'][ind])}, RAMP_Q='fire' /\n")
+        else:
+            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{math.ceil(Hrr['z'][ind]-diferencia)},{math.ceil(Hrr['z'][ind])+Ro-diferencia}, HRRPUV={math.ceil(Hrr['hrr'][ind])}, RAMP_Q='fire' /\n")         
     
     fds.write(f"\n")
     
@@ -440,3 +447,8 @@ def Get_job_id(argv):
     job_id = Lines[1].split()[0]
     return job_id
 ###############################################################################
+
+def return_elevation(Mst, x, y):
+    elevation = Mst[(Mst['x']==x) & (Mst['y']==y)]['Elevation']
+    elevation = int(elevation)
+    return elevation
