@@ -35,6 +35,18 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     global job_log
     global foldername
     global filename
+    global Dx
+    global Nx
+    global Dy
+    global Ny
+    global Dz
+    global Nz
+    global Dx
+    global Nx
+    global Rx
+    global Ry
+    global Rz
+    
     NFRAMES  = int(2*(T_end-T_begin))
 
     # Output File
@@ -60,6 +72,10 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     Nx = math.ceil(DX/R)     # Number of cells in x-direction first mesh (Resolution)
     Ny = math.ceil(DY/R)     # Number of cells in y-direction first mesh (Resolution)
     Nz = math.ceil(DZ/R)     # Number of cells in z-direction first mesh (Resolution)
+    
+    Rx = DX/Nx
+    Ry = DY/Ny 
+    Rz = DZ/Nz
 
     fds.write(f"&MESH IJK={Nx},{Ny},{Nz}, XB={Min_x},{Min_x+DX},{Min_y},{Min_y+DY},{Min_z},{Min_z+DZ}, MULT_ID='mesh' / \n")
     fds.write(f"&MULT ID='mesh', DX={DX}, DY={DY}, DZ={DZ}, I_LOWER=0, I_UPPER={Nmx-1}, J_LOWER=0, J_UPPER={Nmy-1}, K_UPPER={Nmz-1} /  \n\n")
@@ -178,6 +194,8 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     global job_log
     global foldername
     global filename
+
+                  
     NFRAMES  = int(2*(T_end-T_begin))
 
     # Output File
@@ -215,7 +233,18 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     for ind in Hrr.index:
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Ro},{Hrr['y'][ind]},{Hrr['y'][ind]+Ro},{Hrr['z'][ind]},{Hrr['z'][ind]+Ro}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
+        x = Hrr['x'][ind]
+        y = Hrr['y'][ind] 
+        Rx = DX/Nx
+        Ry = DY/Ny 
+        Rz = DZ/Nz
+        elevation = return_elevation(Mst, x, y)
+        diferencia = elevation - Hrr['z'][ind]
+        if (diferencia>0):
+            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]+ diferencia},{Hrr['z'][ind]+diferencia+Rz}, HRRPUV={Hrr['hrr'][ind]*(1+16*diferencia)}, RAMP_Q='fire' /\n")  
+        else:
+            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
+
     
     fds.write(f"\n")
     
