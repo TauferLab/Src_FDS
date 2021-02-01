@@ -194,7 +194,17 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     global job_log
     global foldername
     global filename
-
+    global Dx
+    global Nx
+    global Dy
+    global Ny
+    global Dz
+    global Nz
+    global Dx
+    global Nx
+    global Rx
+    global Ry
+    global Rz
                   
     NFRAMES  = int(2*(T_end-T_begin))
 
@@ -231,19 +241,15 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)}. /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
-
+    
     for ind in Hrr.index:
         x = Hrr['x'][ind]
         y = Hrr['y'][ind] 
         Rx = DX/Nx
         Ry = DY/Ny 
         Rz = DZ/Nz
-        elevation = return_elevation(Mst, x, y)
-        diferencia = elevation - Hrr['z'][ind]
-        if (diferencia>0):
-            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]+ diferencia},{Hrr['z'][ind]+diferencia+Rz}, HRRPUV={Hrr['hrr'][ind]*(1+16*diferencia)}, RAMP_Q='fire' /\n")  
-        else:
-            fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
+        
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
 
     
     fds.write(f"\n")
@@ -473,3 +479,15 @@ def return_elevation(Mst, x, y):
     elevation = Mst[(Mst['x']==x) & (Mst['y']==y)]['Elevation']
     elevation = int(elevation)
     return elevation
+
+def delete_under(Hrr):
+    
+    for ind in Hrr.index:
+        x = Hrr['x'][ind]
+        y = Hrr['y'][ind] 
+        elevation = return_elevation(Mst, x, y)
+        diferencia = elevation - Hrr['z'][ind]
+        if (diferencia>0):
+            Hrr = Hrr.drop([ind])
+      
+    return Hrr
