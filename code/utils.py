@@ -242,6 +242,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
     
+    print(Hrr['hrr'].sum())   
     for ind in Hrr.index:
         x = Hrr['x'][ind]
         y = Hrr['y'][ind] 
@@ -249,7 +250,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
         Ry = DY/Ny 
         Rz = DZ/Nz
         
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire' /\n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire' /\n")
 
     
     fds.write(f"\n")
