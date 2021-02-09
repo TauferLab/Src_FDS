@@ -205,6 +205,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     global Rx
     global Ry
     global Rz
+    global rampa_time
                   
     NFRAMES  = int(2*(T_end-T_begin))
 
@@ -256,7 +257,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write(f"\n")
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin+7.5)}., F=0. /\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin+{rampa_time})}., F=0. /\n")
     #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=0. /\n\n")
 
     fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
