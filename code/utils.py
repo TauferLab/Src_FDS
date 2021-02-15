@@ -251,14 +251,14 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
         Ry = DY/Ny 
         Rz = DZ/Nz
         
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire' /\n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RADIATIVE_FRACTION={rad_frac}, RAMP_Q='fire' /\n")
 
     
     fds.write(f"\n")
     
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {float(T_begin+{rampa_time})}., F=0. /\n")
-    #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=0. /\n\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin)}, F=1. /\n")
+    fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time)}, F=0. /\n")
+    #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}, F=0. /\n\n")
 
     fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
