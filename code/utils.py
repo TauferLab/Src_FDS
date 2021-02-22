@@ -5,15 +5,17 @@
 import pandas as pd
 import numpy as np
 import math
-from mpl_toolkits import mplot3d
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib import cm
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import time
 import os.path
+
+from PIL import Image
+from mpl_toolkits import mplot3d
+from matplotlib import cm
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from os import path
-# from abstract_monitor import AbstractMonitor
 from lsf import LSFMonitor
 from slurm import SlurmMonitor
 
@@ -63,7 +65,13 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds     = open(fds_filename, 'w')
 
     ############################################################
-   
+    # Drawing the area of the region of interest and cropping ot
+    draw_rectangle(Image_name,Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/BigRegion1.png")
+    
+    # Cropping the region from the Big Region
+    crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/Region1.png")
+    
+    ############################################################
     DX  = (Max_x-Min_x)/Nmx
     DY  = (Max_y-Min_y)/Nmy
     DZ  = (Max_z-Min_z)/Nmz
@@ -79,7 +87,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write(f"&MESH IJK={Nx},{Ny},{Nz}, XB={Min_x},{Min_x+DX},{Min_y},{Min_y+DY},{Min_z},{Min_z+DZ}, MULT_ID='mesh' / \n")
     fds.write(f"&MULT ID='mesh', DX={DX}, DY={DY}, DZ={DZ}, I_LOWER=0, I_UPPER={Nmx-1}, J_LOWER=0, J_UPPER={Nmy-1}, K_UPPER={Nmz-1} /  \n\n")
-    fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Chimney_tops_aerial.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
+    fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Region1.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
@@ -223,6 +231,14 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds     = open(fds_filename, 'w')
 
     ############################################################
+    # Drawing the area of the region of interest and cropping it
+    print(Min_x, Max_y)
+    draw_rectangle(f"{PATH}/FDSFiles/{foldername}/BigRegion{num_region-1}.png",Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/Big{Child}.png")
+    
+    # Cropping the region from the Big Region
+    crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/{Child}.png")
+    
+
    
     DX  = (Max_x-Min_x)/Nmx
     DY  = (Max_y-Min_y)/Nmy
@@ -235,7 +251,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write(f"&MESH IJK={Nx},{Ny},{Nz}, XB={Min_x},{Min_x+DX},{Min_y},{Min_y+DY},{Min_z},{Min_z+DZ}, MULT_ID='mesh' / \n")
     fds.write(f"&MULT ID='mesh', DX={DX}, DY={DY}, DZ={DZ}, I_LOWER=0, I_UPPER={Nmx-1}, J_LOWER=0, J_UPPER={Nmy-1}, K_UPPER={Nmz-1} /  \n\n")
-    fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Chimney_tops_aerial.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
+    fds.write(f"&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='{Child}.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
@@ -250,6 +266,8 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
         Rx = DX/Nx
         Ry = DY/Ny 
         Rz = DZ/Nz
+        
+        fds.write(f"&RADI KAPPA0=0 /\n")
         
         fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire', RADIATIVE_FRACTION={rad_frac}/\n")
 
@@ -379,7 +397,7 @@ def reading_hrr(Child, Number_of_meshes):
     
 def remove_leading_space(file_name):
     # Open the file in read only mode
-    Temp_file     = open(f'{file_name[0:-4]}.tmp', 'w')
+    Temp_file     = open(f'{file_name[0:-4]}_1.tmp', 'w')
     
     with open(file_name, 'r') as read_obj:
         # Read all lines in the file one by one
@@ -392,7 +410,7 @@ def remove_leading_space(file_name):
     
     Temp_file.close()
     os.system(f"rm {file_name}")
-    os.system(f"mv {file_name[0:-4]}.tmp {file_name}")
+    os.system(f"mv {file_name[0:-4]}_1.tmp {file_name}")
     return 0    
 
 ##########################################################################
@@ -493,3 +511,30 @@ def delete_under(Hrr):
             Hrr = Hrr.drop([ind])
       
     return Hrr
+
+########################################################################################
+
+def draw_rectangle(image_in,xlb,yub,width0,height0,image_out):
+    # Drawing a rectangle in a picture
+    dpi = 80
+    img = matplotlib.image.imread(image_in)
+    height, width, nbands = img.shape
+    
+    # What size does the figure need to be in inches to fit the image?
+    figsize = width / float(dpi), height / float(dpi)
+    
+    figure = plt.figure(figsize=figsize)
+    ax = figure.add_axes([0, 0, 1, 1])
+    # Hide spines, ticks, etc.
+    ax.axis('off')
+    rect = matplotlib.patches.Rectangle((xlb,1000-yub),width0,height0, edgecolor='r', facecolor="none")   
+    ax.imshow(img)
+    ax.add_patch(rect)
+    figure.savefig(image_out,dpi=dpi,transparent=True)
+    return 0
+
+def crop_rectangle(image_in,xlb,xub,ylb,yub,image_out):
+    # Cropping a rectangle from a picture
+    im  = Image.open(image_in)
+    box = (xlb,1000-yub,xub,1000-ylb)
+    im.crop(box).save(image_out)
