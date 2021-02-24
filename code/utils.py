@@ -514,7 +514,7 @@ def delete_under(Hrr):
 
 ########################################################################################
 
-def draw_rectangle(image_in,xlb,yub,width0,height0,image_out):
+def draw_rectangle(image_in,xlb,yub,width0,height0,image_out,color):
     # Drawing a rectangle in a picture
     dpi = 80
     img = matplotlib.image.imread(image_in)
@@ -527,7 +527,7 @@ def draw_rectangle(image_in,xlb,yub,width0,height0,image_out):
     ax = figure.add_axes([0, 0, 1, 1])
     # Hide spines, ticks, etc.
     ax.axis('off')
-    rect = matplotlib.patches.Rectangle((xlb,1000-yub),width0,height0, edgecolor='r', facecolor="none")   
+    rect = matplotlib.patches.Rectangle((xlb,1000-yub),width0,height0, edgecolor=color, facecolor="none")   
     ax.imshow(img)
     ax.add_patch(rect)
     figure.savefig(image_out,dpi=dpi,transparent=True)
