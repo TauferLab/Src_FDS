@@ -66,7 +66,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     ############################################################
     # Drawing the area of the region of interest and cropping ot
-    draw_rectangle(Image_name,Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/BigRegion1.png")
+    draw_rectangle(Image_name,Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/BigRegion1.png",'w')
     
     # Cropping the region from the Big Region
     crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/Region1.png")
@@ -233,7 +233,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     ############################################################
     # Drawing the area of the region of interest and cropping it
     print(Min_x, Max_y)
-    draw_rectangle(f"{PATH}/FDSFiles/{foldername}/BigRegion{num_region-1}.png",Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/Big{Child}.png")
+    draw_rectangle(f"{PATH}/FDSFiles/{foldername}/BigRegion{num_region-1}.png",Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/Big{Child}.png",'w')
     
     # Cropping the region from the Big Region
     crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/{Child}.png")
