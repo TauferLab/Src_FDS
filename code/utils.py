@@ -91,11 +91,13 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}. /  \n")
-    fds.write(f"&DUMP UVW_TIMER(1)={UVW_Timer} / \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}, UVW_TIMER(1)={UVW_Timer}, PLOT3D_QUANTITY(1:5)='TEMPERATURE', 'U-VELOCITY','V-VELOCITY','W-VELOCITY','HRRPUV' /  \n")
     
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
+    
     for k in Hrr.index:
         fds.write(f"&SURF ID='FIRE{k}', HRRPUA={math.ceil(Hrr['hrr'][k])}., COLOR='ORANGE', RAMP_Q='fire' /\n")
     
@@ -106,7 +108,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+31)}., F=0. /\n\n")
 
-    fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
+    #fds.write("&SLCF PBZ={Max_z}., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
     fds.write("&VENT MB='XMIN', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='XMAX', SURF_ID='OPEN' /  \n")
@@ -256,22 +258,23 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)}. /  \n")
-    fds.write(f"&DUMP UVW_TIMER(1)={UVW_Timer} / \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)},UVW_TIMER(1)={UVW_Timer}, PLOT3D_QUANTITY(1:5)='TEMPERATURE', 'U-VELOCITY','V-VELOCITY','W-VELOCITY','HRRPUV' /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
+                  
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
     
-    print(Hrr['hrr'].sum())   
+    print(Hrr['hrr'].sum())  
+    fds.write(f"&RADI KAPPA0=0 /\n")
     for ind in Hrr.index:
         x = Hrr['x'][ind]
         y = Hrr['y'][ind] 
         Rx = DX/Nx
         Ry = DY/Ny 
         Rz = DZ/Nz
-        
-        fds.write(f"&RADI KAPPA0=0 /\n")
-        
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire', RADIATIVE_FRACTION={rad_frac}/\n")
+                
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire', RADIATIVE_FRACTION={rad_frac} / \n")
 
     
     fds.write(f"\n")
@@ -280,7 +283,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time)}, F=0. /\n")
     #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}, F=0. /\n\n")
 
-    fds.write("&SLCF PBZ=1250., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
+    #fds.write("&SLCF PBZ={Max_z}., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
     fds.write("&VENT MB='XMIN', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='XMAX', SURF_ID='OPEN' /  \n")
@@ -499,8 +502,12 @@ def Get_job_id(argv):
 ###############################################################################
 def return_elevation(Mst, x, y):
     elevation = Mst[(Mst['x']==x) & (Mst['y']==y)]['Elevation']
-    elevation = int(elevation)
-    return elevation
+    if (len(elevation) != 0):
+       elevation = int(elevation)
+       return elevation
+    else:
+       return Mst.min()['Elevation']
+    
 
 def delete_under(Hrr):
     
