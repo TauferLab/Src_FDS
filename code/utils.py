@@ -91,13 +91,12 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}, PLOT3D_QUANTITY(1:5)='TEMPERATURE', 'U-VELOCITY','V-VELOCITY','W-VELOCITY','HRRPUV' /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)} /  \n")
     
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
     fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='TEMPERATURE' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV',SPEC_ID='SOOT' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
     
     for k in Hrr.index:
         fds.write(f"&SURF ID='FIRE{k}', HRRPUA={math.ceil(Hrr['hrr'][k])}., COLOR='ORANGE', RAMP_Q='fire' /\n")
@@ -259,13 +258,12 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)}, PLOT3D_QUANTITY(1:5)='TEMPERATURE', 'U-VELOCITY','V-VELOCITY','W-VELOCITY','HRRPUV' /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)} /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
                   
     fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='TEMPERATURE' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV',SPEC_ID='SOOT' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
     
     print(Hrr['hrr'].sum())  
     fds.write(f"&RADI KAPPA0=0 /\n")
@@ -283,9 +281,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}, F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time)}, F=0. /\n")
-    #fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}, F=0. /\n\n")
 
-    #fds.write("&SLCF PBZ={Max_z}., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
     fds.write("&VENT MB='XMIN', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='XMAX', SURF_ID='OPEN' /  \n")
