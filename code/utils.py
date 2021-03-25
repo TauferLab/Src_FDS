@@ -95,8 +95,9 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
+
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=T /\n")
+
     
     for k in Hrr.index:
         fds.write(f"&SURF ID='FIRE{k}', HRRPUA={math.ceil(Hrr['hrr'][k])}., COLOR='ORANGE', RAMP_Q='fire' /\n")
@@ -262,8 +263,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
                   
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='VELOCITY' /\n")
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='DENSITY',SPEC_ID='SOOT' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=T /\n")
     
     print(Hrr['hrr'].sum())  
     fds.write(f"&RADI KAPPA0=0 /\n")
@@ -274,7 +274,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
         Ry = DY/Ny 
         Rz = DZ/Nz
                 
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]/(Rx*Ry*Rz)}, RAMP_Q='fire', RADIATIVE_FRACTION={rad_frac} / \n")
+        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire'/ \n") # , RADIATIVE_FRACTION={rad_frac} 
 
     
     fds.write(f"\n")
