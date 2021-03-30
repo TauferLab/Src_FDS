@@ -18,6 +18,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from os import path
 from lsf import LSFMonitor
 from slurm import SlurmMonitor
+from slread import slread
 
 
 ###################################################################################################
@@ -91,13 +92,14 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(T_end)} /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={T_end} /  \n")
     
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
 
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=T /\n")
-
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV' /\n")
+    
+    fds.write("&RADI KAPPA0=0 / \n\n")
     
     for k in Hrr.index:
         fds.write(f"&SURF ID='FIRE{k}', HRRPUA={math.ceil(Hrr['hrr'][k])}., COLOR='ORANGE', RAMP_Q='fire' /\n")
@@ -236,7 +238,6 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     ############################################################
     # Drawing the area of the region of interest and cropping it
-    print(Min_x, Max_y)
     draw_rectangle(f"{PATH}/FDSFiles/{foldername}/BigRegion{num_region-1}.png",Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/Big{Child}.png",'w')
     
     # Cropping the region from the Big Region
@@ -259,27 +260,27 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={int(DTT)} /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={T_end} /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
                   
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=T /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV' /\n")
     
-    print(Hrr['hrr'].sum())  
     fds.write(f"&RADI KAPPA0=0 /\n")
     for ind in Hrr.index:
-        x = Hrr['x'][ind]
-        y = Hrr['y'][ind] 
         Rx = DX/Nx
         Ry = DY/Ny 
         Rz = DZ/Nz
                 
-        fds.write(f"&INIT XB={Hrr['x'][ind]},{Hrr['x'][ind]+Rx},{Hrr['y'][ind]},{Hrr['y'][ind]+Ry},{Hrr['z'][ind]},{Hrr['z'][ind]+Rz}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire'/ \n") # , RADIATIVE_FRACTION={rad_frac} 
+        fds.write(f"&INIT XB={Hrr['x'][ind]-Rx},{Hrr['x'][ind]},{Hrr['y'][ind]-Ry},{Hrr['y'][ind]},{Hrr['z'][ind]-Rz},{Hrr['z'][ind]}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire'/ \n") # , RADIATIVE_FRACTION={rad_frac} 
 
     
     fds.write(f"\n")
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}, F=1. /\n")
+    if (DTT < 1.0):
+        fds.write(f"&RAMP ID='fire', T= {T_begin+DTT}, F=1. /\n")
+        Run_Region = False
     fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time)}, F=0. /\n")
 
 
