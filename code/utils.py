@@ -260,7 +260,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={T_end} /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={DTT} /  \n")
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
                   
@@ -281,6 +281,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     if (DTT < 1.0):
         fds.write(f"&RAMP ID='fire', T= {T_begin+DTT}, F=1. /\n")
         Run_Region = False
+    fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time/2)}, F=1. /\n")
     fds.write(f"&RAMP ID='fire', T= {float(T_begin+rampa_time)}, F=0. /\n")
 
 
