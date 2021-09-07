@@ -21,6 +21,11 @@ from slurm import SlurmMonitor
 from slread import slread
 import fileinput
 import sys
+from matplotlib.pyplot import figure
+from matplotlib.colors import ListedColormap
+cmap_brg = plt.cm.get_cmap('brg', 256)
+clist_rg = cmap_brg(np.linspace(0.5, 1, 128))
+cmap_rg = ListedColormap(clist_rg)
 
 ###################################################################################################
 # Function that reads the elevation file
@@ -579,3 +584,44 @@ def Elevation(file,searchExp):
                 z = float(z[0])
                 elevation.append([x,y,z])
         return elevation
+    
+def devices_output(elevation_file,devices_file,resolution,quantity,output):
+    # Reading the elevation file
+    elevation = pd.read_csv(elevation_file)
+    velocity_devices_values = pd.read_csv(devices_file, skiprows=1)
+    # Extracting a uniformlly sample of the elevation of a given resolution
+    elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
+    
+    minimo = velocity_devices_values[velocity_devices_values.columns[1:]].min().min()
+    maximo = velocity_devices_values[velocity_devices_values.columns[1:]].max().max()
+    devices_output = elevation.copy() 
+    for ind in velocity_devices_values.index:
+        velocity_devices_row = velocity_devices_values.iloc[ind].values[1:]
+        devices_output['device'] = velocity_devices_row 
+        devices_output = devices_output[['x','y','device']] 
+        soil_map(devices_output, out=f'{output}/{quantity}/test{ind}.png', size=3.0, title=quantity,cmap=plt.cm.get_cmap('seismic'),vmin=minimo,vmax=maximo)
+        
+    return devices_output
+
+######################################################################################################################
+
+def soil_map(df, title="Soil Moisture Heatmap", out="", cmap=cmap_rg, legend="Soil Moisture", size=.05, vmin=None, vmax=None, value=2):
+    
+    if df.shape[1]<3:
+        raise ValueError("The dataframe doesn't have enough columns.")
+    elif df.shape[1]>3:
+        #print("The dataframe has too many columns, so we're dropping all but the first three.")
+        df = df[df.columns[:3]]
+    heatmap(df, title=title, out=out, cmap=cmap, size=size, vmin=vmin, vmax=vmax, value=value)
+    
+
+# General heatmap function. 
+def heatmap(df, horizontal=0, vertical=1, value=2, vmin=None, vmax=None, size=1, title="Heatmap", out="", cmap=None):
+    df.plot.scatter(x=horizontal, y=vertical, s=size, c=value, cmap=cmap, title=title, vmin=vmin, vmax=vmax)
+    if out:
+        #print(f"Saving image to {out}")
+        plt.savefig(out, dpi=200)
+        #plt.show()
+    else:
+        plt.show()
+    plt.close()
