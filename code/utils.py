@@ -554,7 +554,7 @@ def crop_rectangle(image_in,xlb,xub,ylb,yub,image_out):
     box = (xlb,1000-yub,xub,1000-ylb)
     im.crop(box).save(image_out)
     
-def setting_devices(elevation_file,resolution,quantity,output_file):
+def setting_devices(elevation_file,resolution,quantity,buffer,output_file):
     # Reading the elevation file
     elevation = pd.read_csv(elevation_file)
     
@@ -563,7 +563,7 @@ def setting_devices(elevation_file,resolution,quantity,output_file):
     
     device     = open(output_file, 'w')
     for i in range(0,elevation.shape[0]):
-        device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+0.5},{elevation.iloc[i]['y']+0.5},{math.ceil(elevation.iloc[i]['z'])+0.5},IOR=3, QUANTITY='{quantity}' / \n" %(i))
+        device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+0.5},{elevation.iloc[i]['y']+0.5},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}' / \n" %(i))
     device.close()
     return elevation
 
