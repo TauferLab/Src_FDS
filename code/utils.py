@@ -19,7 +19,8 @@ from os import path
 from lsf import LSFMonitor
 from slurm import SlurmMonitor
 from slread import slread
-
+import fileinput
+import sys
 
 ###################################################################################################
 # Function that reads the elevation file
@@ -547,3 +548,34 @@ def crop_rectangle(image_in,xlb,xub,ylb,yub,image_out):
     im  = Image.open(image_in)
     box = (xlb,1000-yub,xub,1000-ylb)
     im.crop(box).save(image_out)
+    
+def setting_devices(elevation_file,resolution,quantity,output_file):
+    # Reading the elevation file
+    elevation = pd.read_csv(elevation_file)
+    
+    # Extracting a uniformlly sample of the elevation of a given resolution
+    elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
+    
+    device     = open(output_file, 'w')
+    for i in range(0,elevation.shape[0]):
+        device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+0.5},{elevation.iloc[i]['y']+0.5},{math.ceil(elevation.iloc[i]['z'])+0.5},IOR=3, QUANTITY='{quantity}' / \n" %(i))
+    device.close()
+    return elevation
+
+def Elevation(file,searchExp):
+    with open(file, 'r', encoding='utf8') as dsvfile:
+        lines = dsvfile.readlines()
+        lines = [line.rstrip('\n') for line in lines]
+        elevation = []
+        for line in lines:
+            if searchExp in line:
+                split_line = line.split(',')
+                x = split_line[0].split('=')
+                x = float(x[1])
+                
+                y = float(split_line[2])
+                
+                z = split_line[5].split(' ')
+                z = float(z[0])
+                elevation.append([x,y,z])
+        return elevation
