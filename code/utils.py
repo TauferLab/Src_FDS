@@ -563,7 +563,7 @@ def setting_devices(elevation_file,resolution,quantity,buffer,output_file):
     
     device     = open(output_file, 'w')
     for i in range(0,elevation.shape[0]):
-        device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+0.5},{elevation.iloc[i]['y']+0.5},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}' / \n" %(i))
+        device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']},{elevation.iloc[i]['y']},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}' / \n" %(i))
     device.close()
     return elevation
 
