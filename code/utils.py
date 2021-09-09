@@ -588,23 +588,14 @@ def Elevation(file,searchExp):
                 elevation.append([x,y,z])
         return elevation
     
-def devices_output(elevation_file,devices_file,resolution,quantity,output):
+
+def devices_output(devices_file,output):
     # Reading the elevation file
-    elevation = pd.read_csv(elevation_file)
-    velocity_devices_values = pd.read_csv(devices_file, skiprows=1)
-    # Extracting a uniformlly sample of the elevation of a given resolution
-    elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
-    
-    minimo = velocity_devices_values[velocity_devices_values.columns[1:]].min().min()
-    maximo = velocity_devices_values[velocity_devices_values.columns[1:]].max().max()
-    devices_output = elevation.copy() 
-    for ind in velocity_devices_values.index:
-        velocity_devices_row = velocity_devices_values.iloc[ind].values[1:]
-        devices_output['device'] = velocity_devices_row 
-        devices_output = devices_output[['x','y','device']] 
-        soil_map(devices_output, out=f'{output}/{quantity}/test{ind}.png', size=3.0, title=quantity,cmap=plt.cm.get_cmap('seismic'),vmin=minimo,vmax=maximo)
-        
-    return devices_output
+    devices = pd.read_csv(devices_file,header=None)
+    n = devices.shape[1];
+    for i in range(2,n):
+        soil_map(devices, out=f'{output}/hrrpuv/hrrpuv{i-2}.png', size=3.0,title='hrrpuv',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
+    return devices
 
 ######################################################################################################################
 
@@ -628,3 +619,22 @@ def heatmap(df, horizontal=0, vertical=1, value=2, vmin=None, vmax=None, size=1,
     else:
         plt.show()
     plt.close()
+    
+#########################################################################################################################################
+def devices_output_bak(elevation_file,devices_file,resolution,quantity,output):
+    # Reading the elevation file
+    elevation = pd.read_csv(elevation_file)
+    velocity_devices_values = pd.read_csv(devices_file, skiprows=1)
+    # Extracting a uniformlly sample of the elevation of a given resolution
+    elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
+    
+    minimo = velocity_devices_values[velocity_devices_values.columns[1:]].min().min()
+    maximo = velocity_devices_values[velocity_devices_values.columns[1:]].max().max()
+    devices_output = elevation.copy() 
+    for ind in velocity_devices_values.index:
+        velocity_devices_row = velocity_devices_values.iloc[ind].values[1:]
+        devices_output['device'] = velocity_devices_row 
+        devices_output = devices_output[['x','y','device']] 
+        soil_map(devices_output, out=f'{output}/{quantity}/test{ind}.png', size=3.0, title=quantity,cmap=plt.cm.get_cmap('seismic'),vmin=minimo,vmax=maximo)
+        
+    return devices_output
