@@ -566,7 +566,7 @@ def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file
     
     for i in range(0,elevation.shape[0]):
         if(elevation.iloc[i]['x']> border[0] and elevation.iloc[i]['x']< border[1] and elevation.iloc[i]['y'] > border[2] and elevation.iloc[i]['y'] < border[3]):
-            device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']},{elevation.iloc[i]['y']},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}' / \n" %(i))
+            device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+buffer},{elevation.iloc[i]['y']+buffer},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}', PROP_ID='hist', HIDE_COORDINATES=F / \n" %(i))
     device.close()
     return elevation
 
