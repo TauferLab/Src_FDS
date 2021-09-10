@@ -22,7 +22,6 @@
 *.csv
 *.rds
 *.pngi
-*.fds
 *.tif*
 *.nc
 *.tar
