@@ -12,6 +12,6 @@
 #SBATCH -A ASC21014                                 # Allocation name (req'd if you have more than 1
 
 # ibrun is TACC's equivalent of mpiexec command 
-ibrun fds Whole_Nist.fds
+ibrun fds nist.fds
 ### Run this script in the CLI by running the following command:
 ### sbatch slurm_script.sh
