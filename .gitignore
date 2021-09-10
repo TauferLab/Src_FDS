@@ -2,7 +2,6 @@
 *.bnd
 *.end
 *.err
-*.fds
 *.csv
 *.out
 *.png
