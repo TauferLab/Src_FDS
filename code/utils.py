@@ -548,12 +548,22 @@ def draw_rectangle(image_in,xlb,yub,width0,height0,image_out,color):
     figure.savefig(image_out,dpi=dpi,transparent=True)
     return 0
 
-def crop_rectangle(image_in,xlb,xub,ylb,yub,image_out):
+def crop_rectangle(image_in,width,height,xlb,xub,ylb,yub,image_out):
     # Cropping a rectangle from a picture
     im  = Image.open(image_in)
-    box = (xlb,1000-yub,xub,1000-ylb)
-    im.crop(box).save(image_out)
+    ratiox = im.size[0]/width
+    ratioy = im.size[1]/height
     
+    xlb = xlb*ratiox
+    xub = xub*ratiox
+    
+    ylb = ylb*ratioy
+    yub = yub*ratioy
+    
+    
+    box = (xlb,im.size[1]-yub,xub,im.size[1]-ylb)
+    im.crop(box).save(image_out)
+    return 0
 def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file):
     # Reading the elevation file
     elevation = pd.read_csv(elevation_file)
