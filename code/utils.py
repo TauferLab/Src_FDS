@@ -599,13 +599,41 @@ def Elevation(file,searchExp):
         return elevation
     
 
-def devices_output(devices_file,output):
-    # Reading the elevation file
-    devices = pd.read_csv(devices_file,header=None)
-    n = devices.shape[1];
-    for i in range(2,n):
-        soil_map(devices, out=f'{output}/hrrpuv/hrrpuv{i-2}.png', size=3.0,title='hrrpuv',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
-    return devices
+def devices_output(devices_files,devices_fds,region,output):
+    # Reading the location of the devices 
+    for files in devices_files:
+        
+        with open(files, 'r', encoding='utf8') as dsvfile:
+            lines = dsvfile.readlines()
+            lines = [line.rstrip('\n') for line in lines]
+            devices_coordinates = []
+            for line in lines:
+                    split_line = line.split(',')
+                    x = split_line[1].split('=')[1]
+                    y = split_line[2]
+                    devices_coordinates.append([float(x),float(y)])
+            # Reading the device quantity
+            quantity = str(split_line[5].split('=')[1])[1:-1]
+            devices_coordinates = np.array(devices_coordinates)
+
+            devices_df = pd.read_csv(devices_fds,skiprows = 1)
+            number_of_devices = devices_coordinates.shape[0] 
+            Temp1 = devices_df[devices_df.columns[1:number_of_devices+1]].values
+            Temp1 = np.transpose(Temp1)
+            devices = np.concatenate((devices_coordinates,Temp1), axis=1)
+            devices = pd.DataFrame(devices)
+            time = devices.shape[1]
+            isdir = os.path.isdir(f'{output}/{region}/{quantity}')
+
+            if not isdir:
+                os.makedirs(f'{output}/{region}/{quantity}')
+
+
+            for i in range(2,time):
+                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}{i-2}.png', size=3.0,title='hrrpuv',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
+    return 0
+    
+
 
 ######################################################################################################################
 
