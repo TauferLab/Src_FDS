@@ -601,8 +601,10 @@ def Elevation(file,searchExp):
 
 def devices_output(devices_files,devices_fds,region,output):
     # Reading the location of the devices 
+    device_start = 1
+    device_end   = 0;
     for files in devices_files:
-        
+
         with open(files, 'r', encoding='utf8') as dsvfile:
             lines = dsvfile.readlines()
             lines = [line.rstrip('\n') for line in lines]
@@ -613,12 +615,19 @@ def devices_output(devices_files,devices_fds,region,output):
                     y = split_line[2]
                     devices_coordinates.append([float(x),float(y)])
             # Reading the device quantity
-            quantity = str(split_line[5].split('=')[1])[1:-1]
+            #quantity = str(split_line[5].split('=')[1])[1:-1]
+            quantity = files.split('.')
+            quantity = quantity[-2]
+            quantity = quantity.split('_')
+            quantity = str(quantity[-1])
+            
             devices_coordinates = np.array(devices_coordinates)
 
             devices_df = pd.read_csv(devices_fds,skiprows = 1)
             number_of_devices = devices_coordinates.shape[0] 
-            Temp1 = devices_df[devices_df.columns[1:number_of_devices+1]].values
+            device_end        = device_end + number_of_devices
+            Temp1 = devices_df[devices_df.columns[device_start:device_end+1]].values
+            device_start = device_end+1
             Temp1 = np.transpose(Temp1)
             devices = np.concatenate((devices_coordinates,Temp1), axis=1)
             devices = pd.DataFrame(devices)
@@ -630,7 +639,7 @@ def devices_output(devices_files,devices_fds,region,output):
 
 
             for i in range(2,time):
-                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}{i-2}.png', size=3.0,title='hrrpuv',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
+                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}{i-2}.png', size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
     return 0
     
 
