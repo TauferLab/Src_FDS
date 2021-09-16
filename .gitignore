@@ -42,6 +42,7 @@
 *.bsub
 *.err
 *.out
+*.mp4
 *.Rhistory
 .ipynb_checkpoints
 *.swp

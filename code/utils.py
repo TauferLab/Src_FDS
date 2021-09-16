@@ -23,6 +23,8 @@ import fileinput
 import sys
 from matplotlib.pyplot import figure
 from matplotlib.colors import ListedColormap
+from sklearn.preprocessing import MinMaxScaler
+
 cmap_brg = plt.cm.get_cmap('brg', 256)
 clist_rg = cmap_brg(np.linspace(0.5, 1, 128))
 cmap_rg = ListedColormap(clist_rg)
@@ -599,10 +601,12 @@ def Elevation(file,searchExp):
         return elevation
     
 
-def devices_output(devices_files,devices_fds,region,output):
+def devices_output(devices_files,devices_fds,threshold,region,output):
     # Reading the location of the devices 
+    scaler = MinMaxScaler()
     device_start = 1
     device_end   = 0;
+    thr_index    = 0;
     for files in devices_files:
 
         with open(files, 'r', encoding='utf8') as dsvfile:
@@ -629,7 +633,14 @@ def devices_output(devices_files,devices_fds,region,output):
             Temp1 = devices_df[devices_df.columns[device_start:device_end+1]].values
             device_start = device_end+1
             Temp1 = np.transpose(Temp1)
+            
+            maximo = Temp1.max() 
+            
+            Temp1[Temp1 < threshold[thr_index]*maximo ] = 0
+            thr_index = thr_index + 1
+            
             devices = np.concatenate((devices_coordinates,Temp1), axis=1)
+            
             devices = pd.DataFrame(devices)
             time = devices.shape[1]
             isdir = os.path.isdir(f'{output}/{region}/{quantity}')
@@ -639,8 +650,8 @@ def devices_output(devices_files,devices_fds,region,output):
 
 
             for i in range(2,time):
-                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
-    return 0
+                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
+    return Temp1
     
 
 
