@@ -582,6 +582,21 @@ def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file
     device.close()
     return elevation
 
+def reading_devices(elevation_file,resolution,sufix,border):
+    # Reading the elevation file
+    elevation = pd.read_csv(elevation_file)
+    
+    # Extracting a uniformlly sample of the elevation of a given resolution
+    elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
+    
+    device_names     = []
+    
+    for i in range(0,elevation.shape[0]):
+        if(elevation.iloc[i]['x']> border[0] and elevation.iloc[i]['x']< border[1] and elevation.iloc[i]['y'] > border[2] and elevation.iloc[i]['y'] < border[3]):
+            device_names.append(f"DEV_%03d{sufix}" %(i))
+            
+    return device_names
+
 def Elevation(file,searchExp):
     with open(file, 'r', encoding='utf8') as dsvfile:
         lines = dsvfile.readlines()
