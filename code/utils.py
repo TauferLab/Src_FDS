@@ -597,6 +597,30 @@ def reading_devices(elevation_file,resolution,sufix,border):
             
     return device_names
 
+def reading_slide(child,quantity,first,step,meshes,path,file):
+    output_file = path+file
+    column_names = ["x", "y", "z", "hrr"]
+    hrrpuv = pd.DataFrame(columns = column_names)
+    for i in range(meshes):
+        fds     = open(output_file, 'w')
+        fds.write(f"Region1_cat\n")
+        fds.write(f"2\n")
+        fds.write(f"1\n")
+        fds.write(f"n\n")
+        fds.write(f"120 120\n")
+        fds.write(f"1\n")
+        fds.write(f"{first}\n")
+        first = first + step
+        fds.write(f"{quantity}_{i+1}.csv\n")
+        fds.close()
+        os.chdir(path)
+        os.system(f"fds2ascii < {file}")
+        temp = pd.read_csv(f"{quantity}_{i+1}.csv",skiprows = 2, header=None)
+        temp.columns=['x','y','z','hrr']
+        hrrpuv = pd.concat([hrrpuv,temp]) 
+        os.chdir("../../FDS/utils/Reading_Slide")
+    return hrrpuv
+
 def Elevation(file,searchExp):
     with open(file, 'r', encoding='utf8') as dsvfile:
         lines = dsvfile.readlines()
