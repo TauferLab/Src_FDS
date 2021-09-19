@@ -566,6 +566,9 @@ def crop_rectangle(image_in,width,height,xlb,xub,ylb,yub,image_out):
     box = (xlb,im.size[1]-yub,xub,im.size[1]-ylb)
     im.crop(box).save(image_out)
     return 0
+
+############################################################################################################################################
+
 def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file):
     # Reading the elevation file
     elevation = pd.read_csv(elevation_file)
@@ -581,6 +584,19 @@ def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file
             device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+buffer},{elevation.iloc[i]['y']+buffer},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}', PROP_ID='hist', HIDE_COORDINATES=F / \n" %(i))
     device.close()
     return elevation
+
+############################################################################################################################################
+
+def setting_initialization(hrrpuv_df,resolution,output_file):
+    
+    initialization     = open(output_file, 'w')
+        
+    for ind in hrrpuv_df.index:
+        initialization.write(f"&INIT XB={hrrpuv_df['x'][ind]-resolution},{hrrpuv_df['x'][ind]},{hrrpuv_df['y'][ind]-resolution},{hrrpuv_df['y'][ind]},{hrrpuv_df['z'][ind]-resolution},{hrrpuv_df['z'][ind]}, HRRPUV={hrrpuv_df['hrr'][ind]/(resolution*resolution*resolution)}/ \n")
+    initialization.close()
+    return hrrpuv_df
+
+############################################################################################################################################
 
 def reading_devices(elevation_file,resolution,sufix,border):
     # Reading the elevation file
