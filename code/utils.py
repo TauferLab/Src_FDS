@@ -705,7 +705,7 @@ def devices_output(devices_files,devices_fds,threshold,region,output):
 
 
             for i in range(2,time):
-                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]])
+                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]], vmax = 1600)
     return Temp1
     
 
