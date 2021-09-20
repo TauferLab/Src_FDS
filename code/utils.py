@@ -592,7 +592,7 @@ def setting_initialization(hrrpuv_df,resolution,output_file):
     initialization     = open(output_file, 'w')
         
     for ind in hrrpuv_df.index:
-        initialization.write(f"&INIT XB={hrrpuv_df['x'][ind]-resolution},{hrrpuv_df['x'][ind]},{hrrpuv_df['y'][ind]-resolution},{hrrpuv_df['y'][ind]},{hrrpuv_df['z'][ind]-resolution},{hrrpuv_df['z'][ind]}, HRRPUV={hrrpuv_df['hrr'][ind]/(resolution*resolution*resolution)}/ \n")
+        initialization.write(f"&INIT XB={hrrpuv_df['x'][ind]-resolution},{hrrpuv_df['x'][ind]},{hrrpuv_df['y'][ind]-resolution},{hrrpuv_df['y'][ind]},{hrrpuv_df['z'][ind]-resolution},{hrrpuv_df['z'][ind]}, HRRPUV={hrrpuv_df['hrr'][ind]/(resolution*resolution*resolution)}/, RAMP_Q='fire'  \n")
     initialization.close()
     return hrrpuv_df
 
