@@ -613,17 +613,17 @@ def reading_devices(elevation_file,resolution,sufix,border):
             
     return device_names
 
-def reading_slide(child,quantity,first,step,meshes,path,file):
+def reading_slide(child,quantity,first,step,meshes,path,t_start,t_end,file):
     output_file = path+file
     column_names = ["x", "y", "z", "hrr"]
     hrrpuv = pd.DataFrame(columns = column_names)
     for i in range(meshes):
         fds     = open(output_file, 'w')
-        fds.write(f"Region1_cat\n")
+        fds.write(f"{child}\n")
         fds.write(f"2\n")
         fds.write(f"1\n")
         fds.write(f"n\n")
-        fds.write(f"120 120\n")
+        fds.write(f"{t_start} {t_end}\n")
         fds.write(f"1\n")
         fds.write(f"{first}\n")
         first = first + step
@@ -703,7 +703,7 @@ def devices_output(devices_files,devices_fds,threshold,region,output):
             if not isdir:
                 os.makedirs(f'{output}/{region}/{quantity}')
 
-
+            axes.set_ylim([200, 400])
             for i in range(2,time):
                 soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]], vmax = 1600)
     return Temp1

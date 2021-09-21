@@ -1,4 +1,4 @@
-Region1_cat
+region1_cat
 2
 1
 n
