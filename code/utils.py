@@ -8,6 +8,7 @@ import math
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import time
 import os.path
 
@@ -24,6 +25,7 @@ import sys
 from matplotlib.pyplot import figure
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
+from pylab import *
 
 cmap_brg = plt.cm.get_cmap('brg', 256)
 clist_rg = cmap_brg(np.linspace(0.5, 1, 128))
@@ -577,11 +579,10 @@ def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file
     elevation = elevation[(elevation.x%resolution==0) & (elevation.y%resolution==0)]  # Filters data 
     
     device     = open(output_file, 'w')
-    
-    
+   
     for i in range(0,elevation.shape[0]):
         if(elevation.iloc[i]['x']> border[0] and elevation.iloc[i]['x']< border[1] and elevation.iloc[i]['y'] > border[2] and elevation.iloc[i]['y'] < border[3]):
-            device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+buffer},{elevation.iloc[i]['y']+buffer},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}', PROP_ID='hist', HIDE_COORDINATES=F / \n" %(i))
+            device.write(f"&DEVC ID='DEV_%03d{quantity[0]}', XYZ={elevation.iloc[i]['x']+buffer},{elevation.iloc[i]['y']+buffer},{math.ceil(elevation.iloc[i]['z'])+buffer},IOR=3, QUANTITY='{quantity}' \n" %(i))
     device.close()
     return elevation
 
@@ -703,10 +704,9 @@ def devices_output(devices_files,devices_fds,threshold,region,output):
             if not isdir:
                 os.makedirs(f'{output}/{region}/{quantity}')
 
-            axes.set_ylim([200, 400])
             for i in range(2,time):
-                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title='{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]], vmax = 1600)
-    return Temp1
+                soil_map(devices, out=f'{output}/{region}/{quantity}/{quantity}%04d.png' %(i-2), size=3.0,title=f'{quantity}',cmap=plt.cm.get_cmap('RdPu'),value=devices[devices.columns[i]], vmax = 1600)
+    return devices
     
 
 
