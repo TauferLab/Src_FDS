@@ -24,7 +24,7 @@ import fileinput
 import sys
 from matplotlib.pyplot import figure
 from matplotlib.colors import ListedColormap
-from sklearn.preprocessing import MinMaxScaler
+#from sklearn.preprocessing import MinMaxScaler
 from pylab import *
 
 cmap_brg = plt.cm.get_cmap('brg', 256)
@@ -659,7 +659,7 @@ def Elevation(file,searchExp):
 
 def devices_output(devices_files,devices_fds,threshold,region,output):
     # Reading the location of the devices 
-    scaler = MinMaxScaler()
+    #scaler = MinMaxScaler()
     device_start = 1
     device_end   = 0;
     thr_index    = 0;
