@@ -65,23 +65,15 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     # Output File
     Indice = Hrr.index
     Indice2 = [i for i in Mst.index if i not in Indice.values]
-
-    if not path.exists(f"{PATH}/FDSFiles"):
-            os.mkdir(f"{PATH}/FDSFiles")
     
-    if not path.exists(f"{PATH}/FDSFiles/{foldername}"):
-            os.mkdir(f"{PATH}/FDSFiles/{foldername}")
-
-    fds_filename = f"{PATH}/FDSFiles/{foldername}/{filename}"
+    fds_filename = f"{PATH}/simulations/{foldername}/{Child}/{filename}"
     fds     = open(fds_filename, 'w')
 
     ############################################################
     # Drawing the area of the region of interest and cropping ot
-    draw_rectangle(Image_name,Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/BigRegion1.png",'w')
-    
+    draw_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/WholeRegion1.png",'b')
     # Cropping the region from the Big Region
-    crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/Region1.png")
-    
+    crop_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/Region1.png")
     ############################################################
     DX  = (Max_x-Min_x)/Nmx
     DY  = (Max_y-Min_y)/Nmy
@@ -102,7 +94,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
-    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={T_end} /  \n")
+    fds.write(f"&DUMP NFRAMES={NFRAMES}, DT_PART=100., CFL_FILE=.TRUE., DT_PL3D={T_end}, UVW_TIMER(1)={UVW_Timer} /  \n")
     
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
@@ -118,8 +110,8 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}., F=0. /\n")
     fds.write(f"&RAMP ID='fire', T= {int(T_begin+1)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin+30)}., F=1. /\n")
-    fds.write(f"&RAMP ID='fire', T= {int(T_begin+31)}., F=0. /\n\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin+rampa_time)}., F=1. /\n")
+    fds.write(f"&RAMP ID='fire', T= {int(T_begin+rampa_time+1)}., F=0. /\n\n")
 
     #fds.write("&SLCF PBZ={Max_z}., AGL_SLICE=1., QUANTITY='VELOCITY', VECTOR=.TRUE. /\n\n")
 
@@ -128,6 +120,10 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&VENT MB='YMIN', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='YMAX', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='ZMAX', SURF_ID='OPEN' /  \n\n")
+                  
+    fds.write("&SLCF XB=500.0,700.0,200.0,400.0,380.0,620.0, QUANTITY='HRRPUV', CELL_CENTERED=.TRUE. /  \n\n")
+    #fds.write("&CATF OTHER_FILES='../../data/Devices_Inputs/Region1_HRRPUV.dev', '../../data/Devices_Inputs/Region1_VELOCITY.dev' /  \n")
+                                
     fds.write("&REAC FUEL='CELLULOSE', C=6, H=10, O=5, SOOT_YIELD=0.005 / \n\n")
     fds.write("&SPEC ID='WATER VAPOR' / \n\n")
 
@@ -200,11 +196,11 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     # Writing the location of the fire
     for ind in Mst_fire.index:
 
-        fds.write(f"&OBST XB={Mst_fire['x'][ind]},{Mst_fire['x'][ind]+Ro},{Mst_fire['y'][ind]},{Mst_fire['y'][ind]+Ro},{Min_z},{Mst_fire['Elevation'][ind]} SURF_IDS='FIRE{ind}','surf1' /\n")
+        fds.write(f"&OBST XB={Mst_fire['x'][ind]},{Mst_fire['x'][ind]+Ro},{Mst_fire['y'][ind]},{Mst_fire['y'][ind]+Ro},{Min_z},{Mst_fire['z'][ind]} SURF_IDS='FIRE{ind}','surf1' /\n")
         
     for ind in Mst_no_fire.index:
 
-        fds.write(f"&OBST XB={Mst_no_fire['x'][ind]},{Mst_no_fire['x'][ind]+Ro},{Mst_no_fire['y'][ind]},{Mst_no_fire['y'][ind]+Ro},{Min_z},{Mst_no_fire['Elevation'][ind]} SURF_ID='surf1' /\n")        
+        fds.write(f"&OBST XB={Mst_no_fire['x'][ind]},{Mst_no_fire['x'][ind]+Ro},{Mst_no_fire['y'][ind]},{Mst_no_fire['y'][ind]+Ro},{Min_z},{Mst_no_fire['z'][ind]} SURF_ID='surf1' /\n")        
     
 ########################################################################################################################################
     
@@ -533,11 +529,19 @@ def delete_under(Hrr):
 
 ########################################################################################
 
-def draw_rectangle(image_in,xlb,yub,width0,height0,image_out,color):
+def draw_rectangle(image_in,width,height,xlb,xub,ylb,yub,image_out,color):
     # Drawing a rectangle in a picture
     dpi = 80
-    img = matplotlib.image.imread(image_in)
-    height, width, nbands = img.shape
+                  
+    im  = Image.open(image_in)
+    ratiox = im.size[0]/width
+    ratioy = im.size[1]/height
+    
+    xlb = xlb*ratiox
+    xub = xub*ratiox
+    
+    ylb = ylb*ratioy
+    yub = yub*ratioy
     
     # What size does the figure need to be in inches to fit the image?
     figsize = width / float(dpi), height / float(dpi)
@@ -546,8 +550,8 @@ def draw_rectangle(image_in,xlb,yub,width0,height0,image_out,color):
     ax = figure.add_axes([0, 0, 1, 1])
     # Hide spines, ticks, etc.
     ax.axis('off')
-    rect = matplotlib.patches.Rectangle((xlb,1000-yub),width0,height0, edgecolor=color, facecolor="none")   
-    ax.imshow(img)
+    rect = matplotlib.patches.Rectangle((xlb,im.size[1]-yub),xub-xlb,yub-ylb, edgecolor=color, facecolor="none")   
+    ax.imshow(im)
     ax.add_patch(rect)
     figure.savefig(image_out,dpi=dpi,transparent=True)
     return 0
@@ -569,7 +573,7 @@ def crop_rectangle(image_in,width,height,xlb,xub,ylb,yub,image_out):
     im.crop(box).save(image_out)
     return 0
 
-############################################################################################################################################
+######################################################################################################################################
 
 def setting_devices(elevation_file,resolution,quantity,buffer,border,output_file):
     # Reading the elevation file
