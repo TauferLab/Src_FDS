@@ -22,6 +22,8 @@ from slurm import SlurmMonitor
 from slread import slread
 import fileinput
 import sys
+from collections import deque
+
 from matplotlib.pyplot import figure
 from matplotlib.colors import ListedColormap
 #from sklearn.preprocessing import MinMaxScaler
@@ -62,18 +64,14 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
     NFRAMES  = int(2*(T_end-T_begin))
 
-    # Output File
-    Indice = Hrr.index
-    Indice2 = [i for i in Mst.index if i not in Indice.values]
-    
     fds_filename = f"{PATH}/simulations/{foldername}/{Child}/{filename}"
     fds     = open(fds_filename, 'w')
 
     ############################################################
     # Drawing the area of the region of interest and cropping ot
-    draw_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/WholeRegion1.png",'b')
+    draw_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/Whole{Child}.png",'b')
     # Cropping the region from the Big Region
-    crop_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/Region1.png")
+    crop_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/{Child}.png")
     ############################################################
     DX  = (Max_x-Min_x)/Nmx
     DY  = (Max_y-Min_y)/Nmy
@@ -99,7 +97,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
 
 
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV' /\n")
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=.TRUE. /  \n\n")
     
     fds.write("&RADI KAPPA0=0 / \n\n")
     
@@ -120,9 +118,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     fds.write("&VENT MB='YMIN', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='YMAX', SURF_ID='OPEN' /  \n")
     fds.write("&VENT MB='ZMAX', SURF_ID='OPEN' /  \n\n")
-                  
-    fds.write("&SLCF XB=500.0,700.0,200.0,400.0,380.0,620.0, QUANTITY='HRRPUV', CELL_CENTERED=.TRUE. /  \n\n")
-    #fds.write("&CATF OTHER_FILES='../../data/Devices_Inputs/Region1_HRRPUV.dev', '../../data/Devices_Inputs/Region1_VELOCITY.dev' /  \n")
+                 
                                 
     fds.write("&REAC FUEL='CELLULOSE', C=6, H=10, O=5, SOOT_YIELD=0.005 / \n\n")
     fds.write("&SPEC ID='WATER VAPOR' / \n\n")
@@ -209,7 +205,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
     
 ###############################################################################################################
 
-def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
+def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Child):
     global fds
     global job_log
     global foldername
@@ -229,25 +225,18 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
                   
     NFRAMES  = int(2*(T_end-T_begin))
 
-    # Output File
-    Indice = Hrr.index
-    Indice2 = [i for i in Mst.index if i not in Indice.values]
-
-    if not path.exists(f"{PATH}/FDSFiles"):
-            os.mkdir(f"{PATH}/FDSFiles")
     
-    if not path.exists(f"{PATH}/FDSFiles/{foldername}"):
-            os.mkdir(f"{PATH}/FDSFiles/{foldername}")
 
-    fds_filename = f"{PATH}/FDSFiles/{foldername}/{filename}"
+    fds_filename = f"{filename}"
     fds     = open(fds_filename, 'w')
 
     ############################################################
     # Drawing the area of the region of interest and cropping it
-    draw_rectangle(f"{PATH}/FDSFiles/{foldername}/BigRegion{num_region-1}.png",Min_x,Max_y,float(Max_x-Min_x),float(Max_y-Min_y), f"{PATH}/FDSFiles/{foldername}/Big{Child}.png",'w')
-    
+    ############################################################
+    # Drawing the area of the region of interest and cropping ot
+    draw_rectangle(f"{PATH}/simulations/{foldername}/{Child_pr}/Whole{Child_pr}.png",1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/Whole{Child}.png",'b')
     # Cropping the region from the Big Region
-    crop_rectangle(Image_name,Min_x,Max_x,Min_y,Max_y,f"{PATH}/FDSFiles/{foldername}/{Child}.png")
+    crop_rectangle(Image_name,1000,1000,Min_x,Max_x,Min_y,Max_y,f"{PATH}/simulations/{foldername}/{Child}/{Child}.png")
     
 
    
@@ -270,17 +259,9 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write("&WIND DIRECTION=135., SPEED=5., SPONGE_CELLS=0, STRATIFICATION=.FALSE. /\n\n")
                   
-    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV' /\n")
-    
-    fds.write(f"&RADI KAPPA0=0 /\n")
-    for ind in Hrr.index:
-        Rx = DX/Nx
-        Ry = DY/Ny 
-        Rz = DZ/Nz
-                
-        fds.write(f"&INIT XB={Hrr['x'][ind]-Rx},{Hrr['x'][ind]},{Hrr['y'][ind]-Ry},{Hrr['y'][ind]},{Hrr['z'][ind]-Rz},{Hrr['z'][ind]}, HRRPUV={Hrr['hrr'][ind]}, RAMP_Q='fire'/ \n") # , RADIATIVE_FRACTION={rad_frac} 
-
-    
+    fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=.TRUE. /  \n\n")
+    fds.write(f"&CATF OTHER_FILES='../{Child_pr}/{init_file}' / \n\n")
+  
     fds.write(f"\n")
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}, F=1. /\n")
@@ -362,7 +343,7 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
                                     # Obstacles with no fire
     for ind in Mst.index:
 
-        fds.write(f"&OBST XB={Mst['x'][ind]},{Mst['x'][ind]+Ro},{Mst['y'][ind]},{Mst['y'][ind]+Ro},{Min_z},{Mst['Elevation'][ind]} SURF_ID='surf1' /\n")        
+        fds.write(f"&OBST XB={Mst['x'][ind]},{Mst['x'][ind]+Ro},{Mst['y'][ind]},{Mst['y'][ind]+Ro},{Min_z},{Mst['z'][ind]} SURF_ID='surf1' /\n")        
     
 ########################################################################################################################################
     
@@ -597,7 +578,7 @@ def setting_initialization(hrrpuv_df,resolution,output_file):
     initialization     = open(output_file, 'w')
         
     for ind in hrrpuv_df.index:
-        initialization.write(f"&INIT XB={hrrpuv_df['x'][ind]-resolution},{hrrpuv_df['x'][ind]},{hrrpuv_df['y'][ind]-resolution},{hrrpuv_df['y'][ind]},{hrrpuv_df['z'][ind]-resolution},{hrrpuv_df['z'][ind]}, HRRPUV={hrrpuv_df['hrr'][ind]}/, RAMP_Q='fire'  \n")
+        initialization.write(f"&INIT XB={hrrpuv_df['x'][ind]-resolution},{hrrpuv_df['x'][ind]},{hrrpuv_df['y'][ind]-resolution},{hrrpuv_df['y'][ind]},{hrrpuv_df['z'][ind]-resolution},{hrrpuv_df['z'][ind]}, HRRPUV={hrrpuv_df['hrr'][ind]}, RAMP_Q='fire' /  \n")
     initialization.close()
     return hrrpuv_df
 
@@ -639,7 +620,6 @@ def reading_slide(child,quantity,first,step,meshes,path,t_start,t_end,file):
         temp = pd.read_csv(f"{quantity}_{i+1}.csv",skiprows = 2, header=None)
         temp.columns=['x','y','z','hrr']
         hrrpuv = pd.concat([hrrpuv,temp]) 
-        os.chdir("../../FDS/utils/Reading_Slide")
     return hrrpuv
 
 def Elevation(file,searchExp):
@@ -738,3 +718,7 @@ def heatmap(df, horizontal=0, vertical=1, value=2, vmin=None, vmax=None, size=1,
     plt.close()
     
 #########################################################################################################################################
+def tail(filename, n=10):
+    'Return the last n lines of a file'
+    with open(filename) as f:
+        return deque(f, n)
