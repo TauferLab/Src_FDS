@@ -1,8 +1,0 @@
-Region1
-2
-1
-n
-60.0 60.0
-1
-1
-hrrpuv_1.csv
