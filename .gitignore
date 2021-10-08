@@ -1,3 +1,7 @@
+*.dat
+*.fds
+*.txt
+*.sh
 *.binfo
 *.bnd
 *.end
