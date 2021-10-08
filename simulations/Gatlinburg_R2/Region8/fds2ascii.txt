@@ -1,0 +1,8 @@
+Region8_cat
+2
+1
+n
+420.0 420.0
+1
+16
+hrrpuv_16.csv

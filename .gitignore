@@ -46,5 +46,8 @@
 *.Rhistory
 .ipynb_checkpoints
 *.swp
+*.mat
+*.ini
+*.dev
 __pycache__
 
