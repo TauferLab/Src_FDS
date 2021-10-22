@@ -88,7 +88,7 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
     fds.write(f"&MESH IJK={Nx},{Ny},{Nz}, XB={Min_x},{Min_x+DX},{Min_y},{Min_y+DY},{Min_z},{Min_z+DZ}, MULT_ID='mesh' / \n")
     fds.write(f"&MULT ID='mesh', DX={DX}, DY={DY}, DZ={DZ}, I_LOWER=0, I_UPPER={Nmx-1}, J_LOWER=0, J_UPPER={Nmy-1}, K_UPPER={Nmz-1} /  \n\n")
-    fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Region1.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE.  /\n")
+    fds.write("&MISC TMPA=30., TERRAIN_CASE=.TRUE., TERRAIN_IMAGE='Region1.png', VERBOSE=.TRUE., RESTART=.FALSE., PROJECTION=.TRUE., IBLANK_SMV=.FALSE.   /\n")
     
     fds.write(f"&TIME T_BEGIN = {T_begin}, T_END = {T_end} / \n\n")
 
@@ -98,6 +98,16 @@ def write_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Hrr, Child):
 
 
     fds.write(f"&SLCF XB={Min_x},{Max_x},{Min_y},{Max_y},{Min_z},{Max_z}, QUANTITY='HRRPUV', CELL_CENTERED=.TRUE. /  \n\n")
+    
+    elevation_file = f'{PATH}/data/Elevations_Files/gatlinburg_res_1x1.elv'
+    resolution     = R
+    quantity       = 'HRRPUV'
+    buffer         = 0.5
+    border         = [Min_x,Max_x,Min_y,Max_y]
+    device_file    = f'{PATH}/simulations/{foldername}/{Child}/devices_{quantity}.dev'
+    setting_devices(elevation_file,resolution,quantity,buffer,border,device_file)
+    fds.write(f"&CATF OTHER_FILES='devices_{quantity}.dev' / \n\n")
+    
     
     fds.write("&RADI KAPPA0=0 / \n\n")
     
@@ -263,6 +273,15 @@ def restart_fds_file(T_begin, T_end, DT, PC, Nmx, Nmy, Nmz, Child):
     fds.write(f"&CATF OTHER_FILES='../{Child_pr}/{init_file}' / \n\n")
   
     fds.write(f"\n")
+                  
+    elevation_file = f'{PATH}/data/Elevations_Files/gatlinburg_res_1x1.elv'
+    resolution     = R
+    quantity       = 'HRRPUV'
+    buffer         = 0.5
+    border         = [Min_x,Max_x,Min_y,Max_y]
+    device_file    = f'{PATH}/simulations/{foldername}/{Child}/devices_{quantity}.dev'
+    setting_devices(elevation_file,resolution,quantity,buffer,border,device_file)
+    fds.write(f"&CATF OTHER_FILES='devices_{quantity}.dev' / \n\n")
     
     fds.write(f"&RAMP ID='fire', T= {int(T_begin)}, F=1. /\n")
     if (DTT < 1.0):
